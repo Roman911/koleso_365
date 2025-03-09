@@ -1,0 +1,534 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>	
+<body>
+	<script language="JavaScript" type="text/javascript" src="gen_forms.js"></script>
+	<script language="JavaScript" type="text/javascript">
+		function warningspan() {
+			if (document.all != null) {
+				document.all.bodyspan.style.display = "none";
+				document.all.warningspan.style.display = "inline";
+			}
+		}
+	</script>
+	<script language="JavaScript" type="text/javascript">
+		decor_buttonDesignTitleM = new Image();
+		decor_buttonDesignTitleM.src = "img/bt/bt14m.gif";
+	</script>
+	<script language="JavaScript" type="text/javascript">
+		var actionOnLoad = null;
+	</script>
+	<link rel="stylesheet" type="text/css" href="app.css">
+	<div id="content">
+		<span id="warningspan" style="display:none">
+			<br><br><br><br><br>
+			<center><font class="title">Завантаження...</font></center>
+		</span>
+		
+		<span id="bodyspan" style="text-align: center">
+			
+			<script language="JavaScript" type="text/javascript">
+				/**
+					* Get the URL parameters
+					* source: https://css-tricks.com/snippets/javascript/get-url-variables/
+					* @param  {String} url The URL
+					* @return {Object}     The URL parameters
+				*/
+				function getParams(url) {
+					var params = {};
+					var parser = document.createElement('a');
+					parser.href = url;
+					var query = parser.search.substring(1);
+					var vars = query.split('&');
+					for (var i = 0; i < vars.length; i++) {
+						var pair = vars[i].split('=');
+						params[pair[0]] = decodeURIComponent(pair[1]);
+					}
+					return params;
+				};
+				
+				var params = getParams(window.location.href);
+				
+				var backgrounds = params.background;
+				if(backgrounds){
+					var sheet = window.document.styleSheets[0];
+					sheet.insertRule('button.btn.btn_blue { background: #'+backgrounds+'; }', sheet.cssRules.length);
+				}
+				var colors = params.color;
+				if(colors){
+					var sheet = window.document.styleSheets[0];
+					sheet.insertRule('button.btn.btn_blue { color: #'+colors+'; }', sheet.cssRules.length);
+				}
+				
+				var tyre_width = params.tyre_width || 205;
+				var tyre_height = params.tyre_height || 55;
+				var diameter = params.diameter || 16;
+				var disk_width = params.disk_width ? parseFloat(params.disk_width).toFixed(1) : '3.5';
+				var disk_et = params.disk_et || 0;
+				var no_disk = params.no_disk == '1';
+				var no_tyre = params.no_tyre == '1';
+				
+				var nextFrameLoaded = 0;
+				
+				function loadNextFrame() {
+					if (nextFrameLoaded == 0) {
+						// iframe2.document.location = "render.html?frameName=iframe2&showRim=1&showTire=1&sw=125&ar=85&bd=16&rd=16&rw=3.5&et=25&text=Пример+2:+докатка+Citroen+C4+Picasso";
+						iframe2.document.location = "render_ua.html?frameName=iframe2&" +
+						"showRim=" + (params.no_disk ? '0' : '1') +
+						"&showTire=" + (params.no_tyre ? '0' : '1') +
+						"&sw=" + tyre_width +
+						"&ar=" + tyre_height +
+						"&bd=" + diameter +
+						"&rd=" + diameter +
+						"&rw=" + disk_width +
+						"&et=" + disk_et;
+						nextFrameLoaded = 1;
+					}
+				}
+				
+				function compareSizes() {
+					outStr = "<div class='table-responsive'><table width=680 class='withlines' border=0 cellspacing=1 cellpadding=2 align='center'>";
+					
+					
+					outStr += "<tr><td align='center' width='20%' class='text-center'><b>Диски:</b></td><th width='40%' class='text-center'>Диск 1</th><th width='40%'>Диск 2</th></tr>";
+					
+					outStr += "<tr><th>Розмір диска</th><td align='center'>";
+					if (iframe1.showRim > 0)
+					outStr += Math.round( iframe1.rw * 2 / 25.4 ) / 2 + "x" + Math.round( iframe1.rd / 25.4 ) + " ET " + iframe1.et;
+					outStr += "</td><td align='center'>";
+					if (iframe2.showRim > 0)
+					outStr += Math.round( iframe2.rw * 2 / 25.4 ) / 2 + "x" + Math.round( iframe2.rd / 25.4 ) + " ET " + iframe2.et;
+					outStr += "</td></tr>";
+					
+					/*
+						outStr+="<tr><th>BackSpace</th><td align='center'>";
+						if(iframe1.showRim>0)
+						outStr+=Math.round(iframe1.backspace_mm+12)+" мм ("+Math.round((iframe1.backspace_mm+12)/2.54)/10+"'')";
+						outStr+="</td><td align='center'>";
+						if(iframe2.showRim>0)
+						outStr+=Math.round(iframe2.backspace_mm+12)+" мм ("+Math.round((iframe2.backspace_mm+12)/2.54)/10+"'')";
+						if(iframe1.showRim>0 && iframe2.showRim>0)
+						if(iframe2.backspace_mm != iframe1.backspace_mm){
+						d=Math.round(iframe1.backspace_mm - iframe2.backspace_mm);
+						outStr+="<br>"+Math.abs(d)+" мм ("+Math.round(Math.abs(d)/2.54)/10+"'') ";
+						if(iframe2.backspace_mm > iframe1.backspace_mm)
+						outStr+="deeper.";
+						else
+						outStr+="shorter.";
+						}
+						outStr+="</td></tr>";
+						d=Math.round((iframe1.rimWidth_mm-iframe1.backspace_mm)-(iframe2.rimWidth_mm-iframe2.backspace_mm));
+						d=Math.round((iframe1.rimWidth_mm-iframe1.backspace_mm)-(iframe2.rimWidth_mm-iframe2.backspace_mm));
+						if(iframe1.showRim>0 && iframe2.showRim>0 && d!=0){
+						outStr+="<tr><th>Rim Lip</th><td align='center'>";
+						if(d>0)
+						outStr+=d+" мм ("+Math.round(Math.abs(d)/2.54)/10+"'') wider</td><td> </td>";
+						else{
+						d=-d;
+						outStr+="</td><td align='center'>"+d+" мм ("+Math.round(Math.abs(d)/2.54)/10+"'') wider</td>";
+						}
+						outStr+="</td></tr>";
+						}
+					*/
+					outStr += "<tr><td align='center' width='20%' ><b>Шини:</b></td><th width='40%' class='text-center'>Шина 1</th><th width='40%' class='text-center'>Шина 2</th></tr>";
+					
+					outStr += "<tr><th>Розмір шини</th><td align='center'>";
+					if (iframe1.showTire > 0)
+					outStr += iframe1.sw + "/" + iframe1.ar + "R" + Math.round( iframe1.bd / 25.4 );
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0)
+					outStr += iframe2.sw + "/" + iframe2.ar + "R" + Math.round( iframe2.bd / 25.4 );
+					outStr += "</td></tr>";
+					
+					outStr += "<tr><th>Ширина покришки</th><td align='center'>";
+					if (iframe1.showTire > 0)
+					outStr += iframe1.sw + " мм (" + Math.round( iframe1.sw / 2.54 ) / 10 + "'')";
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0)
+					outStr += iframe2.sw + " мм (" + Math.round( iframe2.sw / 2.54 ) / 10 + "'')";
+					outStr += "</td></tr>";
+					
+					outStr += "<tr><th>Висота профілю</th><td align='center'>";
+					if (iframe1.showTire > 0)
+					outStr += iframe1.tireWall_mm + " мм (" + Math.round( iframe1.tireWall_mm / 2.54 ) / 10 + "'')";
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0)
+					outStr += iframe2.tireWall_mm + " мм (" + Math.round( iframe2.tireWall_mm / 2.54 ) / 10 + "'')";
+					outStr += "</td></tr>";
+					
+					d = iframe2.tireHeight_mm - iframe1.tireHeight_mm;
+					outStr += "<tr><th>Зовнішній діаметр колеса</th><td align='center'>";
+					if (iframe1.showTire > 0)
+					outStr += iframe1.tireHeight_mm + " мм (" + Math.round( iframe1.tireHeight_mm / 2.54 ) / 10 + "'')";
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0)
+					outStr += iframe2.tireHeight_mm + " мм (" + Math.round( iframe2.tireHeight_mm / 2.54 ) / 10 + "'')";
+					if (iframe1.showTire > 0 && iframe2.showTire > 0)
+					if (iframe2.tireHeight_mm != iframe1.tireHeight_mm) {
+						outStr += "<br>на " + Math.abs( d ) + " мм (" + Math.round( Math.abs( d ) * 1000 / iframe1.tireHeight_mm ) / 10 + "%) ";
+						if (iframe2.tireHeight_mm > iframe1.tireHeight_mm) {
+							outStr += "вище.";
+							if (Math.abs( d ) > 50)
+							outStr += "<br><font color='#ff2200'>ЗАНАДТО висока!</font>";
+							} else {
+							outStr += "нижче.";
+							if (Math.abs( d ) > 50)
+							outStr += "<br><font color='#ff2200'>ЗАНАДТО низька!</font>";
+						}
+					}
+					outStr += "</td></tr>";
+					
+					outStr += "<tr><th>Ширина обода</th><td align='center'>";
+					if (iframe1.showTire > 0)
+					outStr += "від " + Math.round( iframe1.bd / 25.4 ) + "x" + iframe1.rimWidthMin( iframe1.sw, iframe1.ar ) + " до " + Math.round( iframe1.bd / 25.4 ) + "x" + iframe1.rimWidthMax( iframe1.sw, iframe1.ar );
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0)
+					outStr += "від " + Math.round( iframe2.bd / 25.4 ) + "x" + iframe2.rimWidthMin( iframe2.sw, iframe2.ar ) + " до " + Math.round( iframe2.bd / 25.4 ) + "x" + iframe2.rimWidthMax( iframe2.sw, iframe2.ar );
+					outStr += "</td></tr>";
+					
+					outStr += "<tr><th>Довжина окружності</th><td align='center'>";
+					if (iframe1.showTire > 0) {
+						d = Math.round( 3.14 * iframe1.tireHeight_mm );
+						outStr += d + " мм (" + Math.round( d / 2.54 ) / 10 + "'')";
+					}
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0) {
+						d = Math.round( 3.14 * iframe2.tireHeight_mm );
+						outStr += d + " мм (" + Math.round( d / 2.54 ) / 10 + "'')";
+					}
+					outStr += "</td></tr>";
+					
+					//outStr+="<tr><th>Оборотов за милю</th><td align='center'>";
+					outStr += "<tr><th>Оборотів за км</th><td align='center'>";
+					if (iframe1.showTire > 0) {
+						//d=Math.round(16093400/(3.14*iframe1.tireHeight_mm))/10;
+						d = Math.round( 10000000 / (3.14 * iframe1.tireHeight_mm) ) / 10;
+						outStr += d;
+					}
+					outStr += "</td><td align='center'>";
+					if (iframe2.showTire > 0) {
+						//d=Math.round(16093400/(3.14*iframe2.tireHeight_mm))/10;
+						d = Math.round( 10000000 / (3.14 * iframe2.tireHeight_mm) ) / 10;
+						outStr += d;
+					}
+					outStr += "</td></tr>";
+					
+					if (iframe1.showTire > 0 && iframe2.showTire > 0)
+					if (iframe2.tireHeight_mm != iframe1.tireHeight_mm) {
+						outStr += "<tr><th>Спідометр</th><td valign='top'>";
+						//					d=Math.round(3.14*iframe1.tireHeight_mm);
+						outStr += "Припустимо, що це штатні розміри і, отже, показання спідометра вірні <img src='img/bt/arrowright2.gif' width=4 height=7 border=0>";
+						outStr += "</td><td >";
+						
+						//d=Math.round(600*iframe2.tireHeight_mm/iframe1.tireHeight_mm)/10;
+						d = Math.round( 1000 * iframe2.tireHeight_mm / iframe1.tireHeight_mm ) / 10;
+						//outStr+="Когда спидометр показывает 60mph (96.6км/ч), реальная скорость составляет "+d+"mph ("+Math.round(96.6*d/6)/10+"км/ч): ";
+						outStr += "Коли спідометр показує <nobr>100 км/год</nobr>, реальна швидкість становить <nobr>" + d + " км/год</nobr> (";
+						//d=Math.round(1000*(60-d)/60)/10;
+						d = Math.round( 1000 * (100 - d) / 100 ) / 10;
+						if (d)
+						outStr += "на ";
+						outStr += Math.abs( d ) + "% ";
+						if (d < 0)
+						outStr += "більше";
+						else
+						outStr += "менше";
+						
+						//outStr+="</td></tr>";
+						outStr += ")</td></tr>";
+					}
+					
+					
+					if (iframe1.showTire > 0 && iframe2.showTire > 0 && iframe1.showRim > 0 && iframe2.showRim > 0) {
+						outStr += "<tr><td align='center' width='20%'><b>Зазор до...</b></td><th width='40%' class='text-center'>Колесо 1</th><th width='40%' class='text-center'>Колесо 2</th></tr>";
+						//suspension clearance
+						sc = Math.round( 0.5 * iframe2.sw + iframe2.et - 0.5 * iframe1.sw - iframe1.et );
+						//fenders clearance
+						fc = Math.round( 0.5 * iframe2.sw - iframe2.et - 0.5 * iframe1.sw + iframe1.et );
+						//wheelwell clearance
+						ww = Math.round( 0.5 * iframe2.tireHeight_mm - 0.5 * iframe1.tireHeight_mm );
+						
+						outStr += "<tr><th>...підвіски</th><td rowspan=3 valign='top'>";
+						outStr += "Припустимо, що це штатні колеса і, отже, немає проблем із зазорами <img src='img/bt/arrowright2.gif' width=4 height=7 border=0>";
+						outStr += "</td><td >";
+						if (Math.abs( sc ) < 2)
+						outStr += "Такий же";
+						else if (sc < 0)
+						outStr += "100% достатній (більше, ніж штатний) ";
+						/*
+							else
+							if(sc<5)
+							outStr+="100% достаточный (точно как штатный) ";
+							else
+							if(sc<10)
+							outStr+="100% достаточный (почти как штатный) ";
+						*/
+						else {
+							outStr += "Колесо на " + sc + " мм (" + Math.round( sc / 2.54 ) / 10 + "'') ближче до деталей підвіски та гальмівної системи. ";
+							if (sc <= 15)
+							outStr += "Для більшості автомобілів прийнятно.";
+							else
+							outStr += "Переконайтеся, що на вашому автомобілі достатньо вільного місця для деталей підвіски. Якщо ні, виберіть менші вильоти, вужчі шини або використовуйте проставки. ";
+						}
+						outStr += "</td></tr>";
+						
+						outStr += "<tr><th>...крил</th><td>";
+						if (Math.abs( fc ) < 2)
+						outStr += "Такий же.";
+						else if (fc < 0)
+						outStr += "100% достатній (більше, ніж штатний) ";
+						/*
+							else
+							if(fc<5)
+							outStr+="100% достаточный (точно как штатный) ";
+							else
+							if(fc<10)
+							outStr+="100% достаточный (почти как штатный) ";
+						*/
+						else {
+							outStr += "Колесо випиратиме назовні на " + fc + " мм (" + Math.round( fc / 2.54 ) / 10 + "'') щодо штатного. ";
+							if (fc <= 15)
+							outStr += "Для більшості автомобілів прийнятно. ";
+							else
+							outStr += "Переконайтеся, що на вашому автомобілі достатньо місця до крил. Якщо ні, використовуйте більш вузькі шини або більший виліт диска. ";
+						}
+						outStr += "</td></tr>";
+						
+						
+						outStr += "<tr><th>...колісних арок</th><td>";
+						if (Math.abs( ww ) < 2)
+						outStr += "Такий же";
+						else if (ww < 0)
+						outStr += "100% достатній (навіть більше, ніж штатний)";
+						else {
+							outStr += "Ближче до колісної арки на " + ww + " мм. ";
+							if (ww < 5)
+							outStr += "Майже як штатний ";
+							else if (ww < 13)
+							outStr += "Для більшості автомобілів прийнятно. ";
+							else
+							outStr += "Переконайтеся, що на вашому авто достатньо місця під крилами. Якщо ні, використовуйте шини нижчого профілю або менш широкі диски. ";
+						}
+						outStr += "</td></tr>";
+					}
+					
+					outStr += "</table></div>";
+					
+					if (iframe1.showTire > 0) {
+						td0 = iframe1.tireHeight_mm;
+						outStr += "<br><center><font color='#ff2200'>*</font> Замість шини <b>" + iframe1.sw + "/" + iframe1.ar + "R" + Math.round( iframe1.bd / 25.4 ) + "</b> можна використовувати такі розмірності (не всі з них існують насправді):</center>";
+						outStr += "<div class='table-responsive'><table width=640 class='withlines' border=0 cellspacing=1 cellpadding=3 align='center'>";
+						outStr += "<tr><th rowspan=2>Розмір диска</th><th colspan=7>Ширина шини:</th></tr>"
+						outStr += "<tr>"
+						for (sw = iframe1.sw; sw <= Math.min( 365, iframe1.sw + 50 ); sw += 10) {
+							outStr += "<th>"
+							swd = sw - iframe1.sw;
+							if (swd != 0) {
+								if (swd > 0)
+								outStr += "+";
+								outStr += swd + ": ";
+							}
+							outStr += sw;
+							outStr += "</th>"
+						}
+						outStr += "</tr>"
+						for (rd = Math.max( 13, Math.round( iframe1.bd / 25.4 ) ); rd <= Math.min( 28, Math.round( iframe1.tireHeight_mm / 25.4 ) - 6 ); rd++)
+						if (rd != 25 && rd != 27) {
+							outStr += "<tr>"
+							outStr += "<th valign='top'>"
+							rdd = rd - Math.round( iframe1.bd / 25.4 );
+							if (rdd != 0) {
+								if (rdd > 0)
+								outStr += "+";
+								outStr += rdd + ": ";
+							}
+							outStr += rd + "''";
+							outStr += "</th>"
+							for (sw = iframe1.sw; sw <= Math.min( 365, iframe1.sw + 50 ); sw += 10) {
+								outStr += "<td valign='top' nowrap>"
+								for (ar = 20; ar <= 85; ar += 5) {
+									wall = Math.round( sw * ar / 100 );
+									td = Math.round( rd * 25.4 ) + wall * 2;
+									tdd = td - td0;
+									if (tdd >= -25)
+									if (tdd <= 50) {
+										outStr += sw + "/" + ar + "R" + rd;
+										if (Math.abs( tdd ) >= 10) {
+											outStr += " <small>" + Math.abs( tdd ) + "мм";
+											if (tdd < 0)
+											outStr += " -";
+											else
+											outStr += "+";
+											outStr += "</small>";
+										}
+										outStr += "<br>";
+									}
+								}
+								outStr += "</td>"
+							}
+							outStr += "</tr>";
+						}
+						outStr += "</table></div>";
+					}
+					document.getElementById( "compareSpecs" ).innerHTML = outStr;
+				}
+			</script>
+			
+			
+			<!--	<table style="margin-top: 20px; margin-bottom: 20px;" border="0" cellpadding="2" cellspacing="0" width="600"-->
+			<!--           align="center">-->
+			<!--		<tbody><tr>-->
+			<!--			<td style="padding: 0px;" align="right"><img src="bt14l.gif"></td>-->
+			<!--			<td style="padding: 0px; text-align: center; color: white; background-image: url('img/bt/bt14m.gif');"-->
+			<!--                nowrap="nowrap" valign="top"><b class="subMenuTitle">Шинно-дисковый калькулятор</b></td>-->
+			<!--			<td style="padding: 0px;"><img src="bt14r.gif"></td>-->
+			<!--		</tr>-->
+			<!--		<tr>-->
+			<!--			<td colspan="3" align="center">Изменяйте параметры, смотрите как изменяются габариты колеса</td>-->
+			<!--		</tr>-->
+			<!--	</tbody></table>-->
+			
+			<table border="0" cellpadding="0" cellspacing="0" align="center">
+				<tbody><tr>
+					<td>
+						<iframe name="iframe1" src="loading_ua.htm" frameborder="0" height="520" scrolling="no"
+                                width="340"></iframe>
+					</td>
+					<td width="5">&nbsp;
+					</td>
+					<td>
+						<iframe name="iframe2" src="loading_ua.htm" frameborder="0" height="520" scrolling="no"
+                                width="340"></iframe>
+					</td>
+				</tr>
+				</tbody></table>
+				
+				<br>
+				
+				<span id="compareSpecs">
+					<div class='table-responsive'>
+						<table class="withlines" border="0" cellpadding="2" cellspacing="1" width="680"
+						align="center"><tbody><tr><td width="20%" align="center"><b>Диски:</b></td><th
+							width="40%">Диск 1</th><th width="40%">Диск 2</th></tr><tr><th>Розмір диска</th><td align="center">7x16 ET 25</td><td
+							align="center">3.5x16 ET 25</td></tr><tr><td width="20%" align="center"><b>Шини:</b></td><th width="40%">Шина 1</th><th
+							width="40%">Шина 2</th></tr><tr><th>Розмір шини</th><td align="center">215/55R16</td><td align="center">125/85R16</td></tr><tr><th>Ширина покришки</th><td
+							align="center">215 мм (8.5'')</td><td align="center">125 мм (4.9'')</td></tr><tr><th>Висота профілю</th><td
+							align="center">118 мм (4.6'')</td><td align="center">106 мм (4.2'')</td></tr><tr><th>Зовнішній діаметр колеса</th><td
+							align="center">642 мм (25.3'')</td><td align="center">618 мм (24.3'')<br>на 24 мм (3.7%) нижче.</td></tr><tr><th>Ширина обода</th><td
+							align="center">от 16x6 до 16x8</td><td align="center">от 16x2.5 до 16x4.5</td></tr><tr><th>Довжина окружності</th><td
+							align="center">2016 мм (79.4'')</td><td align="center">1941 мм (76.4'')</td></tr><tr><th>Оборотів за км</th><td
+							align="center">496.1</td><td align="center">515.3</td></tr><tr><th>Спідометр</th><td valign="top">Припустимо, що це штатні розміри і, отже, показання спідометра вірні <img
+                                src="arrowright2.gif" height="7" border="0" width="4"></td><td>Коли спідометр показує <nobr>100 км/год</nobr>, реальна швидкість становить <nobr>96.3 км/год</nobr> (на 3.7% менше)</td></tr><tr><td
+							width="20%" align="center"><b>Зазор до...</b></td><th width="40%">Колесо 1</th><th width="40%">Колесо 2</th></tr><tr><th>...підвіски</th><td
+							rowspan="3" valign="top">Припустимо, що це штатні колеса і, отже, немає проблем із зазорами <img
+                                src="arrowright2.gif" height="7" border="0" width="4"></td><td>100% достатній (більше, ніж штатний) </td></tr><tr><th>...крил</th><td>100% достатній (більше, ніж штатний) </td></tr><tr><th>...колісних арок</th><td>100% достатній (навіть більше, ніж штатний)</td></tr></tbody></table>
+					</div>	
+					<br><center><font
+					color="#ff2200">*</font> Замість шини <b>215/55R16</b> можна використовувати такі розмірності (не всі з них існують насправді):</center>
+					<div class='table-responsive'>
+						<table class="withlines" border="0" cellpadding="3" cellspacing="1" width="640" align="center"><tbody><tr><th
+							rowspan="2">Розмір диска</th><th colspan="7">Ширина шини:</th></tr><tr><th>215</th><th>+10: 225</th><th>+20: 235</th><th>+30: 245</th><th>+40: 255</th><th>+50: 265</th></tr><tr><th
+							valign="top">16''</th><td nowrap="nowrap" valign="top">215/50R16 <small>20мм -</small><br>215/55R16<br>215/60R16 <small>22мм+</small><br>215/65R16 <small>44мм+</small><br></td><td
+							nowrap="nowrap" valign="top">225/50R16 <small>10мм -</small><br>225/55R16 <small>12мм+</small><br>225/60R16 <small>34мм+</small><br></td><td
+							nowrap="nowrap" valign="top">235/45R16 <small>24мм -</small><br>235/50R16<br>235/55R16 <small>22мм+</small><br>235/60R16 <small>46мм+</small><br></td><td
+							nowrap="nowrap" valign="top">245/45R16 <small>16мм -</small><br>245/50R16 <small>10мм+</small><br>245/55R16 <small>34мм+</small><br></td><td
+							nowrap="nowrap" valign="top">255/45R16<br>255/50R16 <small>20мм+</small><br>255/55R16 <small>44мм+</small><br></td><td
+							nowrap="nowrap" valign="top">265/40R16 <small>24мм -</small><br>265/45R16<br>265/50R16 <small>30мм+</small><br></td></tr><tr><th
+							valign="top">+1: 17''</th><td nowrap="nowrap" valign="top">215/45R17 <small>16мм -</small><br>215/50R17<br>215/55R17 <small>26мм+</small><br>215/60R17 <small>48мм+</small><br></td><td
+							nowrap="nowrap" valign="top">225/45R17<br>225/50R17 <small>16мм+</small><br>225/55R17 <small>38мм+</small><br></td><td
+							nowrap="nowrap" valign="top">235/40R17 <small>22мм -</small><br>235/45R17<br>235/50R17 <small>26мм+</small><br>235/55R17 <small>48мм+</small><br></td><td
+							nowrap="nowrap" valign="top">245/40R17 <small>14мм -</small><br>245/45R17 <small>10мм+</small><br>245/50R17 <small>36мм+</small><br></td><td
+							nowrap="nowrap" valign="top">255/40R17<br>255/45R17 <small>20мм+</small><br>255/50R17 <small>46мм+</small><br></td><td
+							nowrap="nowrap" valign="top">265/35R17 <small>24мм -</small><br>265/40R17<br>265/45R17 <small>28мм+</small><br></td></tr><tr><th
+							valign="top">+2: 18''</th><td nowrap="nowrap" valign="top">215/40R18 <small>13мм -</small><br>215/45R18<br>215/50R18 <small>31мм+</small><br></td><td
+							nowrap="nowrap" valign="top">225/40R18<br>225/45R18 <small>17мм+</small><br>225/50R18 <small>41мм+</small><br></td><td
+							nowrap="nowrap" valign="top">235/35R18 <small>21мм -</small><br>235/40R18<br>235/45R18 <small>27мм+</small><br></td><td
+							nowrap="nowrap" valign="top">245/35R18 <small>13мм -</small><br>245/40R18 <small>11мм+</small><br>245/45R18 <small>35мм+</small><br></td><td
+							nowrap="nowrap" valign="top">255/35R18<br>255/40R18 <small>19мм+</small><br>255/45R18 <small>45мм+</small><br></td><td
+							nowrap="nowrap" valign="top">265/30R18 <small>25мм -</small><br>265/35R18<br>265/40R18 <small>27мм+</small><br></td></tr><tr><th
+							valign="top">+3: 19''</th><td nowrap="nowrap" valign="top">215/35R19<br>215/40R19 <small>13мм+</small><br>215/45R19 <small>35мм+</small><br></td><td
+							nowrap="nowrap" valign="top">225/30R19 <small>23мм -</small><br>225/35R19<br>225/40R19 <small>21мм+</small><br>225/45R19 <small>43мм+</small><br></td><td
+							nowrap="nowrap" valign="top">235/30R19 <small>17мм -</small><br>235/35R19<br>235/40R19 <small>29мм+</small><br></td><td
+							nowrap="nowrap" valign="top">245/30R19 <small>11мм -</small><br>245/35R19 <small>13мм+</small><br>245/40R19 <small>37мм+</small><br></td><td
+							nowrap="nowrap" valign="top">255/30R19<br>255/35R19 <small>19мм+</small><br>255/40R19 <small>45мм+</small><br></td><td
+						nowrap="nowrap" valign="top">265/30R19<br>265/35R19 <small>27мм+</small><br></td></tr></tbody></table>
+					</div>
+				</span>
+				
+				
+				<script language="JavaScript" type="text/javascript">
+					actionOnLoad = function () {
+						// iframe1.document.location = "render.html?frameName=iframe1&showRim=1&showTire=1&sw=215&ar=55&bd=16&rd=16&rw=7.0&et=25&text=Пример+1:+колесо+Citroen+C4+Picasso";
+						iframe1.document.location = "render_ua.html?frameName=iframe1&" +
+						"showRim=" + (params.no_tyre ? '0' : '1') +
+						"&showTire=" + (params.no_disk ? '0' : '1') +
+						"&sw=" + tyre_width +
+						"&ar=" + tyre_height +
+						"&bd=" + diameter +
+						"&rd=" + diameter +
+						"&rw=" + disk_width +
+						"&et=" + disk_et;
+					}
+				</script>
+				
+				
+				
+				<div class="tires-converter-wrap">
+					<p class="js-error-no-all-data dn">Не всі дані введені.</p>
+					<p class="js-error-bad-calculations dn">Результат некоректний. Будь ласка перевірте введені дані.</p>
+					<div class="to-inches-converter convert-block" data-converter="to-inches-converter" id="to-inches-converter">
+						<p class="convert-block_title">Калькулятор конвертації метричного розміру шин в дюймовий (Американський)</p>
+						<div class="dflex">
+							<p class="convert-block_title-blue">Переведення розміру шин з метричного в дюймовий</p>
+						</div>
+						<p class="convert-block_exapmple">Приклад: LT235/75R16 = 30/9,5R16</p>
+						<form class="dflex js-to-inch" action="#" data-gtm-form-interact-id="0">
+							<div class="dflex-center flex-wrap mb20">
+								<input class="js-meter-width" max="1000" min="0" placeholder="235" step="0.5" type="number" data-gtm-form-interact-field-id="0" required=""> / <input class="js-meter-height" max="1000" min="0" placeholder="75" step="0.5" type="number" data-gtm-form-interact-field-id="1" required=""> R <input class="js-meter-radius" max="1000" min="0" placeholder="16" step="0.5" type="number" data-gtm-form-interact-field-id="2" required="">
+								<div class="dflex-center mobile-mt-20">Повний діаметр шини: <input class="js-meter-full-diametr" max="1000" min="0" readonly="" step="0.5" type="number">
+								</div>
+							</div>
+							<div class="dflex-center mb20">Ширина шини: <input class="js-inch-width" readonly="" step="0.5" tabindex="-1" type="number"> Висота профілю: <input class="js-inch-height" readonly="" step="0.5" tabindex="-1" type="number">
+							</div>
+							<div class="dflex flex-wrap mobile-justify-content-between">
+								<button type="submit" class="btn btn_blue">Розрахувати</button>
+								<span class="mobile-hide">&nbsp;</span>
+								<button class="btn btn_gray btn_color-black btn_small" type="reset">Очистити</button>
+							</div>
+						</form>
+					</div>
+					<div class="to-meters-converter convert-block" data-converter="to-meters-converter" id="to-meters-converter">
+						<p class="convert-block_title">Калькулятор конвертації дюймового розміру шин в метричний (Європейський)</p>
+						<div class="dflex">
+							<p class="convert-block_title-blue">Перведення розміру шин з дюймового в метричний</p>
+						</div>
+						<p class="convert-block_exapmple">Приклад: 30/9.5R16 = LT240/75R16</p>
+						<p class="convert-block_tip">ширина задається через крапку (8.5; 9.5; 11.5 і т.д.)</p>
+						<form class="dflex js-to-meters" action="#">
+							<div class="dflex-center flex-wrap">
+								<div>Американський розмір:</div>
+								<div class="dflex-center mb20">
+									<input class="js-full-diametr-inch" max="1000" min="0" placeholder="30" step="0.01" type="number" required=""> / <input class="js-width-inch" max="1000" min="0" placeholder="9.5" required="" step="0.01" type="number"> R <input class="js-radius-inch" max="1000" min="0" placeholder="16" required="" step="0.5" type="number">
+								</div>
+							</div>
+							<div class="dflex-center flex-wrap">
+								<div>Європейський розмір:</div>
+								<div class="dflex-center mb20">
+									<input class="js-width-meter" readonly="" step="0.5" tabindex="-1" type="number"> / <input class="js-height-meter" readonly="" step="0.5" tabindex="-1" type="number"> R <input class="js-radius-meter" readonly="" step="0.5" tabindex="-1" type="number">
+								</div>
+							</div>
+							<div class="dflex flex-wrap mobile-justify-content-between">
+								<button class="btn btn_blue">Розрахувати</button>
+								<span class="mobile-hide">&nbsp;</span>
+								<button class="btn btn_gray btn_color-black btn_small" type="reset">Очистити</button>
+							</div>
+						</form>
+					</div>
+				</div>
+		</span>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script language="JavaScript" type="text/javascript" src="calctyres.js"></script>
+		</div>
+	</body>
+</html>

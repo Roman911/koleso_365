@@ -1,0 +1,13 @@
+.item-list {
+	&::-webkit-scrollbar {
+		width: 10px;
+		border-radius: 6px;
+		background-color: #E4E4E5;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #ABAFB2;
+		border: 2px solid #E4E4E5;
+		border-radius: 6px;
+	}
+}

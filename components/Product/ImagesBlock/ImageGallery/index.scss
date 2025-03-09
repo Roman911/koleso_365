@@ -1,0 +1,18 @@
+.image-gallery-icon {
+	@apply text-blue-200 hover:text-blue-400 drop-shadow;
+}
+
+.image-gallery-left-nav .image-gallery-svg,
+.image-gallery-right-nav .image-gallery-svg {
+	@apply w-7;
+}
+
+.image-gallery-thumbnail {
+	@apply border-2;
+
+	&.active,
+	&:focus,
+	&:hover {
+		@apply border-2 border-blue-400;
+	}
+}

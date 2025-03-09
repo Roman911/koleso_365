@@ -1,0 +1,18 @@
+@media screen and (max-width: 1024px) {
+  .container {
+    grid-template-areas: "logo menu"
+    	"search search";
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .search {
+    grid-area: search;
+  }
+
+  .menu {
+    grid-area: menu;
+  }
+}

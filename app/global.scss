@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer base {
+  input {
+    outline: none;
+  }
+
+  .icon {
+    @apply text-2xl;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply h-12 rounded-sm font-bold w-72 flex justify-center items-center transition-all;
+  }
+
+  .primary {
+    @apply bg-primary text-black hover:bg-primary transition disabled:bg-gray-300;
+  }
+
+  .secondary {
+    @apply bg-white hover:bg-blue-200;
+  }
+
+  .success {
+    @apply bg-black text-white hover:bg-gray-800;
+  }
+
+  .small {
+    @apply w-20;
+  }
+}

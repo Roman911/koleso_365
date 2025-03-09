@@ -1,0 +1,18 @@
+export const ROUTES = {
+	home: 'ru?/',
+	catalog: 'ru?/catalog/:section/*',
+	product: 'ru?/*',
+	bookmarks: 'ru?/bookmarks/',
+	comparison: 'ru?/comparison/',
+	cart: 'ru?/cart/',
+	order: 'ru?/order/',
+	successful: 'ru?/order/successful/',
+	tyreDiskSizeCalc: 'ru?/tyre-disk-size-calc/',
+	search: 'ru?/search/',
+	autoGoods: 'ru?/auto-goods/',
+	services: 'ru?/services/',
+	page: 'ru?/page/*',
+	brands: 'ru?/catalog-map',
+	catalogMap: 'ru?/catalog-map/:section/',
+	catalogList: 'ru?/catalog-map/:section/:id',
+};
