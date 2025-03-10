@@ -18,7 +18,7 @@ async function getSettings() {
 }
 
 async function getProducts() {
-	const res = await fetch(`${ process.env.SERVER_URL }/api/getProducts?vehicle_type=1&order[value]=popular&order[asc]=0`, {
+	const res = await fetch(`${ process.env.SERVER_URL }/api/getProducts?typeproduct=1&order[value]=featured&order[asc]=0`, {
 		method: 'POST',
 		headers: {
 			'Access-Control-Allow-Credentials': 'true',
@@ -30,7 +30,7 @@ async function getProducts() {
 }
 
 async function getProductsAkum() {
-	const res = await fetch(`${ process.env.SERVER_URL }/api/getProducts?typeproduct=4&order[value]=popular&order[asc]=0`, {
+	const res = await fetch(`${ process.env.SERVER_URL }/api/getProducts?typeproduct=4&order[value]=featured&order[asc]=0`, {
 		method: 'POST',
 		headers: {
 			'Access-Control-Allow-Credentials': 'true',
