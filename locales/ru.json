@@ -111,6 +111,7 @@
     "strengthening": "Усиление",
     "summer": "Летние",
     "suvs": "Внедорожники",
+    "SUVs": "Внедорожники",
     "tires": "Шины",
     "to apply": "Применить",
     "type": "Тип",
@@ -220,7 +221,9 @@
   "Select": {
     "city": "Город",
     "department": "Отделение",
-    "no options message": "Совпадений не найдено"
+    "no options message": "Совпадений не найдено",
+    "popular": "Популярные",
+    "all": "Все"
   },
   "Sort": {
     "by number of offers": "По количеству предложений",

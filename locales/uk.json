@@ -112,6 +112,7 @@
     "strengthening": "Посилення",
     "summer": "Літні",
     "suvs": "Позашляховики",
+    "SUVs": "Позашляховики",
     "tires": "Шини",
     "to apply": "Застосувати",
     "type": "Тип",
@@ -221,7 +222,9 @@
   "Select": {
     "city": "Місто",
     "department": "Відділення",
-    "no options message": "Збігів не знайдено"
+    "no options message": "Збігів не знайдено",
+    "popular": "Популярні",
+    "all": "Всі"
   },
   "Sort": {
     "by number of offers": "За кількістю пропозицій",

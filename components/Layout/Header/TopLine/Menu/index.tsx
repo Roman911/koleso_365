@@ -17,7 +17,7 @@ const Menu: FC<Props> = ({ alias }) => {
 				return <Link
 					key={ index }
 					href={ `/page/${item.slug}` }
-					className='text-xs 2xl:text-sm font-medium uppercase'>
+					className='text-xs 2xl:text-sm font-medium uppercase hover:underline'>
 					{ item.descriptions[locale === Language.UK ? 'ua' : 'ru'].title }
 				</Link>
 			}) }

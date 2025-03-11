@@ -47,7 +47,7 @@ const SectionTires: FC<Props> = ({ filterData, onChange }) => {
 					options={ filterData?.tyre_height?.map(item => ({ value: item.value, label: item.value, p: item.p })) || []}
 					variant='gray'
 					onChange={ onChange }
-					filterValue={ filter?.radius }
+					filterValue={ filter?.height }
 					search={ true }
 				/>
 				<Select
@@ -57,7 +57,7 @@ const SectionTires: FC<Props> = ({ filterData, onChange }) => {
 					options={ filterData?.tyre_diameter?.map(item => ({ value: item.value, label: `R${ item.value }`, p: item.p })) || []}
 					variant='gray'
 					onChange={ onChange }
-					filterValue={ filter?.width }
+					filterValue={ filter?.radius }
 					search={ true }
 				/>
 			</> }

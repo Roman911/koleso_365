@@ -22,7 +22,7 @@ const LanguageChanger = () => {
 					href={ pathname }
 					className={
 						twMerge(
-							'leading-8 pr-1.5 2xl:pr-3 active:text-black',
+							'leading-8 pr-1.5 2xl:pr-3 active:text-black hover:text-black',
 							locale === item.language && 'text-black pointer-events-none',
 							index === 0 && 'pr-1.5 2xl:pr-3',
 							index === 1 && 'pl-1.5 2xl:px-3'

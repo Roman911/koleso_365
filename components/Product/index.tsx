@@ -130,24 +130,25 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 									{ offers.map(item => {
 										return <Radio color='primary' key={ item.offer_id } value={ `${item.offer_id}` } classNames={{
 											control: 'h-4 w-4',
-											wrapper: 'bg-white'
+											wrapper: 'bg-white',
+											labelWrapper: 'w-full'
 										}}
-										className='bg-white md:bg-transparent border md:border-0 rounded-full mt-4 w-full'
+										className='bg-white md:bg-transparent border md:border-0 rounded-full mt-4 w-full max-w-full'
 										>
 											<div
-												className='flex items-center justify-between gap-4'
+												className='grid-cols-9 grid md:grid-cols-9 w-full gap-1 md:gap-2 items-center md:min-w-[460px]'
 											>
-												<div className='font-medium'>
+												<div className='font-medium col-span-2 md:col-span-2'>
 													{ item.quantity } шт.
 												</div>
-												<div className='country md:col-span-3'>
+												<div className='country col-span-3 md:col-span-4'>
 													<CountryInfo
 														country={ locale === Language.UK ? item.country : item.country_ru }
 														countryCode={ countryCodeTransform(item.country) } year={ item.year }
 														mobileHidden={ true }
 													/>
 												</div>
-												<div className='price md:col-span-2 font-bold content-center'>
+												<div className='price col-span-4 md:col-span-3 font-bold content-center'>
 													{ item.price } грн
 												</div>
 											</div>

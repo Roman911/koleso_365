@@ -2,6 +2,7 @@
 import { FC, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import { useAppDispatch } from '@/hooks/redux';
 import { useAppSubmit } from '@/hooks/submit';
 import { setParams } from '@/store/slices/filterSlice';
@@ -45,28 +46,22 @@ export const SelectFromTo: FC<SelectFromTo> = ({ nameMin, nameMax, from, to, tit
 	return <div className='mt-5'>
 		<div className='text-sm font-bold text-gray-500 uppercase'>{ title }</div>
 		<div className='flex gap-2 mt-3'>
-			<div
-				className='flex h-10 rounded-full mx-auto bg-white p-0.5 mt-4 lg:mt-0 border border-gray-300 w-full lg:max-w-[140px]'>
-				<input
-					type="text"
-					value={ minMax.min }
-					maxLength={ 6 }
-					onChange={ event => onChange('min', event.target.value) }
-					className="w-full flex bg-transparent pl-4 text-[15px] text-gray-500 font-medium outline-0"
-					placeholder={ `${ t('from') } ${ from }` }
-				/>
-			</div>
-			<div
-				className='flex h-10 rounded-full mx-auto bg-white p-0.5 mt-4 lg:mt-0 border border-gray-300 w-full lg:max-w-[140px]'>
-				<input
-					type="text"
-					value={ minMax.max }
-					maxLength={ 6 }
-					onChange={ event => onChange('max', event.target.value) }
-					className="w-full flex bg-transparent pl-4 text-[15px] text-gray-500 font-medium outline-0"
-					placeholder={ `До ${ to }` }
-				/>
-			</div>
+			<Input
+				placeholder={ `${ t('from') } ${ from }` }
+				maxLength={ 6 }
+				value={ minMax.min }
+				variant='bordered'
+				radius='full'
+				onChange={ event => onChange('min', event.target.value) }
+			/>
+			<Input
+				placeholder={ `До ${ to }` }
+				maxLength={ 6 }
+				value={ minMax.max }
+				variant='bordered'
+				radius='full'
+				onChange={ event => onChange('max', event.target.value) }
+			/>
 		</div>
 		<Button onPress={ handleClick } className='btn bg-black text-white max-w-full w-full uppercase mt-4 mb-4'>
 			{ btnTitle }

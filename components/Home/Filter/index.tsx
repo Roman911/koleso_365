@@ -44,7 +44,7 @@ const Filter = () => {
 	}
 
 	return (
-		<section className='home-filter md:flex md:gap-4 w-full bg-primary md:bg-transparent rounded-3xl py-6 px-2 md:p-0'>
+		<section className='home-filter md:flex md:gap-4 w-full bg-blue-500 md:bg-transparent rounded-3xl py-6 px-2 md:p-0'>
 			<FilterBlock onSubmit={ submit } section={ section } subsection={ subsection } className='hidden md:flex'>
 				{ subsection === Subsection.ByParams ?
 					<TiresFilter filters={ getFilters({ locale, section, data }) } onChange={ onChange } section={ section } /> :

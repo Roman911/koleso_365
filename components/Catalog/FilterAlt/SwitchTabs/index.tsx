@@ -14,7 +14,7 @@ const SwitchTabs = ({ section }: { section: Section }) => {
 				href={ url }
 				className={ twMerge(
 					'text-sm font-bold uppercase py-3.5 rounded-t-sm border border-slate-200 border-b-0 text-center bg-white',
-					section !== value && 'bg-gray-200 text-gray-400'
+					section !== value && 'bg-gray-200 text-gray-500'
 				) }
 			>
 				{ value === Section.Battery ? 'АКБ' : t(value) }

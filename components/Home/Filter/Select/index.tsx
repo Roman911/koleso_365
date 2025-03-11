@@ -1,9 +1,12 @@
 'use client'
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
-import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
+import { Autocomplete, AutocompleteItem, AutocompleteSection } from '@heroui/autocomplete';
 import type { Options } from '@/models/baseData';
 import { Section } from '@/models/filter';
+import { POPULAR_SIZE } from '@/etc/const';
+
+const popularSize = ['width', 'height', 'radius'];
 
 interface SelectProps {
 	name: string
@@ -18,6 +21,7 @@ interface SelectProps {
 
 const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = false, onChange, section, color = 'primary' }) => {
 	const t = useTranslations('Select');
+	const popularSizeOptions = section === Section.Tires && popularSize.includes(name) && POPULAR_SIZE[name];
 
 	const onSelectionChange = (key: number | string | null) => {
 		onChange(name, key, section);
@@ -25,12 +29,12 @@ const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = fal
 
 	return <Autocomplete
 		color={ color || 'primary' }
-		className='max-w-full md:max-w-xs text-white'
+		className='max-w-full md:max-w-xs'
 		classNames={{
-			listboxWrapper: 'rounded-xs',
-			base: 'bg-red-500 text-red-500'
+			popoverContent: 'rounded-none',
+			selectorButton: 'text-black'
 		}}
-		label={ label }
+		label={ <span className='text-black'>{ label }</span> }
 		isDisabled={ isDisabled }
 		onSelectionChange={onSelectionChange}
 		radius='none'
@@ -38,7 +42,18 @@ const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = fal
 			emptyContent: t('no options message'),
 		}}
 	>
-		{ options.map((item) => (
+		{ popularSizeOptions ? <>
+			<AutocompleteSection classNames={{ heading: 'text-medium font-bold text-black' }} title={ t('popular') }>
+				{ popularSizeOptions.map((item) => (
+					<AutocompleteItem key={ item.value }>{ item.label }</AutocompleteItem>
+				)) }
+			</AutocompleteSection>
+			<AutocompleteSection classNames={{ heading: 'text-medium font-bold text-black' }} title={ t('all') }>
+				{ options.map((item) => (
+					<AutocompleteItem key={ item.value }>{ item.label }</AutocompleteItem>
+				)) }
+			</AutocompleteSection>
+		</> : options.map((item) => (
 			<AutocompleteItem key={ item.value }>{ item.label }</AutocompleteItem>
 		)) }
 	</Autocomplete>
