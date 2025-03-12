@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { twMerge } from 'tailwind-merge';
 import { Navbar, NavbarBrand, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/navbar';
@@ -13,8 +13,14 @@ import * as Icons from '@/components/UI/Icons';
 import CarTireFilter from './CarTireFilter';
 import CarDiskFilter from '@/components/Layout/Header/HeaderMain/CarDiskFilter';
 import { links } from '@/components/Layout/Header/links';
+import { SettingsProps } from '@/models/settings';
+import Contacts from '@/components/Layout/Header/HeaderMain/Contacts';
 
-const HeaderMain = () => {
+interface Props {
+	settings: SettingsProps
+}
+
+const HeaderMain: FC<Props> = ({ settings }) => {
 	const [ isMenuOpen, setIsMenuOpen ] = useState(false);
 	const [ filterIsOpen, setFilterOpen ] = useState<boolean | string>(false);
 	const t = useTranslations('Main');
@@ -38,7 +44,7 @@ const HeaderMain = () => {
 			isMenuOpen={ isMenuOpen }
 			onMenuOpenChange={ setIsMenuOpen }
 			className={ twMerge('bg-white relative') }
-			classNames={ { wrapper: twMerge('grid h-40 md:h-24 items-center justify-normal py-3 px-4 grid-cols-2 lg:grid-cols-[240px_auto_auto_150px]', styles['container']) } }
+			classNames={ { wrapper: twMerge('grid h-30 md:h-18 items-center justify-normal py-1 px-4 grid-cols-2 gap-2 md:gap-4 lg:grid-cols-[260px_auto_auto_150px]', styles['container']) } }
 		>
 			<NavbarContent className={ styles.logo }>
 				<NavbarBrand>
@@ -51,11 +57,12 @@ const HeaderMain = () => {
 			<NavbarContent className={ styles.search }>
 				<Search />
 			</NavbarContent>
-			<NavbarContent justify='end'>
+			<NavbarContent justify='end' className='px-4'>
+				<Contacts settings={ settings } />
 				<ButtonBlock />
 				<NavbarMenuToggle className="sm:hidden" aria-label={ isMenuOpen ? "Close menu" : "Open menu" }/>
 			</NavbarContent>
-			<NavbarMenu className={ twMerge('mt-36 bg-white pt-16', styles.menu) }>
+			<NavbarMenu className={ twMerge('mt-6 bg-white pt-16', styles.menu) }>
 				<NavbarMenuItem>
 					<button
 						onClick={ () => handleClick('tires') }

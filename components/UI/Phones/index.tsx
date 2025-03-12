@@ -46,7 +46,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 						height={ 20 }
 						priority
 					/> }
-					<a href={ `tel:${ item.url }` } className='ml-1 md:ml-2.5'>
+					<a href={ `tel:${ item.url }` } className='ml-1 md:ml-2.5 text-gray-600'>
 						{ item.phone }
 					</a>
 				</div>

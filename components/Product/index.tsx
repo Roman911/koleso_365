@@ -89,7 +89,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 
 	return (
 		<section className='product-page flex flex-col lg:flex-row justify-between gap-1 xl:gap-x-6 mt-4 md:mt-6'>
-			<div className='max-w-[900px] flex-1 pr-3 xl:pr-5'>
+			<div className='flex-1 pr-3 xl:pr-5'>
 				{ data.result &&
 					<div className='flex flex-col md:flex-row items-center md:items-start md:border-b border-gray-200'>
 						<ImagesBlock
@@ -104,7 +104,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 						<ActionsBlock className='flex md:hidden' id={ id } section={ section } quantity={ quantity } productName={ full_name } />
 						<div className='flex-1 md:ml-6 xl:ml-10'>
 							<h1 className='text-2xl font-bold mt-8 md:mt-0'>{ full_name }</h1>
-							<div className='flex mt-5 items-center'>
+							<div className='flex mt-4 items-center'>
 								<div
 									className='text-[15px] text-gray-700 bg-gray-300 rounded-full py-1 md:py-1 px-3 mr-5'>Артикул: { offer_group.sku }</div>
 								<Rating
@@ -112,11 +112,11 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 									commentsAvgRate={ averageScore || 0 }
 								/>
 							</div>
-							<div className='flex justify-between mt-7 md:mt-11'>
+							<div className='flex justify-between mt-4 md:mt-5'>
 								<div>
 									<div className='flex items-end'>
 										<div className='mr-2.5 text-xl font-medium'>{ t('from') }</div>
-										<div className='text-4xl font-bold mr-2.5'>{ min_price } ₴</div>
+										<div className='text-4xl font-bold mr-2.5'>{ offer?.price } ₴</div>
 										<div className='text-xl font-medium'>/шт.</div>
 									</div>
 									<div className='mt-3 text-gray-500'>
@@ -125,7 +125,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 								</div>
 								<ActionsBlock className='hidden md:flex' id={ id } section={ section } quantity={ quantity } productName={ full_name } />
 							</div>
-							<div className='offers mt-7 mb-5'>
+							<div className='offers mt-4 mb-5'>
 								<RadioGroup color='primary' value={ offerId } onValueChange={ handleChange } size='lg'>
 									{ offers.map(item => {
 										return <Radio color='primary' key={ item.offer_id } value={ `${item.offer_id}` } classNames={{
@@ -133,7 +133,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 											wrapper: 'bg-white',
 											labelWrapper: 'w-full'
 										}}
-										className='bg-white md:bg-transparent border md:border-0 rounded-full mt-4 w-full max-w-full'
+											className='bg-white md:bg-transparent border md:border-0 rounded-full mt-2 md:mt-0 w-full max-w-full'
 										>
 											<div
 												className='grid-cols-9 grid md:grid-cols-9 w-full gap-1 md:gap-2 items-center md:min-w-[460px]'

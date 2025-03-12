@@ -32,7 +32,7 @@ const ButtonBlock = () => {
 
 	return (
 		<>
-			<Link href='/bookmarks' className='relative'>
+			<Link href='/bookmarks' className='relative flex'>
 				<Badge
 					color='primary'
 					content={ bookmarksItems.length }
@@ -42,7 +42,7 @@ const ButtonBlock = () => {
 					<Icons.HeartIcon className='stroke-black'/>
 				</Badge>
 			</Link>
-			<Link href='/cart' className='relative'>
+			<Link href='/cart' className='relative flex'>
 				<Badge
 					color='primary'
 					content={ cartItems.length }

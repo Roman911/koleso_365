@@ -46,7 +46,7 @@ const ProductCard: FC<Props> = ({ item }) => {
 	};
 
 	return (
-		<Card radius='none' className='relative'>
+		<Card radius='none' className='relative py-2 px-4'>
 			<CardBody>
 				<div className='relative min-h-72 sm:min-h-52 text-center'>
 					<IconsBlock season={ season } vehicle_type={ vehicle_type } />
@@ -70,7 +70,6 @@ const ProductCard: FC<Props> = ({ item }) => {
 				<div className='w-full flex justify-between'>
 					<div>
 						<div className='flex items-end mb-0.5'>
-							<div className='text-sm font-medium mb-0.5 mr-1'>{ t('from') }</div>
 							<div className='text-2xl font-bold'>{ min_price } ₴</div>
 						</div>
 					</div>

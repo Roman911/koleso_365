@@ -5,6 +5,7 @@ import { Autocomplete, AutocompleteItem, AutocompleteSection } from '@heroui/aut
 import type { Options } from '@/models/baseData';
 import { Section } from '@/models/filter';
 import { POPULAR_SIZE } from '@/etc/const';
+import './index.css';
 
 const popularSize = ['width', 'height', 'radius'];
 
@@ -21,7 +22,9 @@ interface SelectProps {
 
 const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = false, onChange, section, color = 'primary' }) => {
 	const t = useTranslations('Select');
-	const popularSizeOptions = section === Section.Tires && popularSize.includes(name) && POPULAR_SIZE[name];
+	const popularSizeOptions =
+		section === Section.Tires ? popularSize.includes(name) && POPULAR_SIZE[name]
+			: section === Section.Battery && name === 'jemnist' && POPULAR_SIZE[name];
 
 	const onSelectionChange = (key: number | string | null) => {
 		onChange(name, key, section);
@@ -32,7 +35,8 @@ const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = fal
 		className='max-w-full md:max-w-xs'
 		classNames={{
 			popoverContent: 'rounded-none',
-			selectorButton: 'text-black'
+			selectorButton: 'text-black',
+			base: 'autocomplete-section'
 		}}
 		label={ <span className='text-black'>{ label }</span> }
 		isDisabled={ isDisabled }

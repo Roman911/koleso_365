@@ -16,24 +16,10 @@ export const getAkumFilters = ({ data }: Props) => {
 	const filterConfigs: FilterConfigs[] = [];
 
 	filterConfigs.push({
-		label: 'height',
-		name: 'visota',
+		label: 'capacity',
+		name: 'jemnist',
 		focusValue: '',
-		options: data?.visota.map(item => ({ value: item.value, label: item.value, p: item.p }))
-	});
-
-	filterConfigs.push({
-		label: 'width',
-		name: 'sirina',
-		focusValue: '',
-		options: data?.sirina.map(item => ({ value: item.value, label: item.value, p: item.p }))
-	});
-
-	filterConfigs.push({
-		label: 'length',
-		name: 'dovzina',
-		focusValue: '',
-		options: data?.dovzina.map(item => ({ value: item.value, label: item.value, p: item.p }))
+		options: data?.jemnist.map(item => ({value: item.value, label: item.value, p: item.p}))
 	});
 
 	filterConfigs.push({
@@ -44,17 +30,31 @@ export const getAkumFilters = ({ data }: Props) => {
 	});
 
 	filterConfigs.push({
-		label: 'capacity',
-		name: 'jemnist',
-		focusValue: '',
-		options: data?.jemnist.map(item => ({value: item.value, label: item.value, p: item.p}))
-	});
-
-	filterConfigs.push({
 		label: 'polarity',
 		name: 'poliarnist',
 		focusValue: '',
 		options: data?.poliarnist.map(item => ({value: item.value, label: item.value, p: item.p}))
+	});
+
+	filterConfigs.push({
+		label: 'length',
+		name: 'dovzina',
+		focusValue: '',
+		options: data?.dovzina.map(item => ({ value: item.value, label: item.value, p: item.p }))
+	});
+
+	filterConfigs.push({
+		label: 'width',
+		name: 'sirina',
+		focusValue: '',
+		options: data?.sirina.map(item => ({ value: item.value, label: item.value, p: item.p }))
+	});
+
+	filterConfigs.push({
+		label: 'height',
+		name: 'visota',
+		focusValue: '',
+		options: data?.visota.map(item => ({ value: item.value, label: item.value, p: item.p }))
 	});
 
 	return filterConfigs;

@@ -1,0 +1,6 @@
+.autocomplete-section {
+    input {
+        color: var(--g-color-grey-700);
+        font-weight: 700;
+    }
+}

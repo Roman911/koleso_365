@@ -9,8 +9,8 @@ const Logo: FC = () => {
 			<Image
 				src={ logo }
 				alt="logo"
-				width={ 243 }
-				height={ 50 }
+				width={ 260 }
+				height={ 54 }
 				priority
 			/>
 		</Link>

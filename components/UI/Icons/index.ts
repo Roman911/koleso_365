@@ -21,6 +21,7 @@ export { default as MailIcon } from './MailIcon';
 export { default as MenuIcon } from './MenuIcon';
 export { default as MotorcyclesIcon } from './MotorcyclesIcon';
 export { default as PaymentIcon } from './PaymentIcon';
+export { default as PhoneIcon } from './PhoneIcon';
 export { default as PhoneCircuitIcon } from './PhoneCircuitIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ShareIcon } from './ShareIcon';

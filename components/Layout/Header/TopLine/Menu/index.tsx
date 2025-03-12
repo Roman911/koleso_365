@@ -12,7 +12,7 @@ const Menu: FC<Props> = ({ alias }) => {
 	const locale = useLocale();
 
 	return (
-		<nav className='gap-2 2xl:gap-5 items-center hidden lg:flex ml-auto mr-4'>
+		<nav className='gap-2 2xl:gap-6 items-center hidden lg:flex ml-auto mr-8'>
 			{ alias.header.map((item, index) => {
 				return <Link
 					key={ index }
