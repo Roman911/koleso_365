@@ -30,11 +30,13 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 		{ phone: settings.ua.config_telephone_life, url: settings.ua.config_telephone_life_url, logo: 'lifecell' },
 	];
 
+	const filterTelephones = telephones.filter(i => i.phone);
+
 	return (
 		<div className={
 			twMerge('py-1 flex items-center', isInfo && 'text-black flex-col items-start gap-2', className)
 		}>
-			{ telephones.map((item, index) => {
+			{ filterTelephones.map((item, index) => {
 				return <div
 					key={ index }
 					className={ twMerge('flex items-center my-0.5 text-sm font-bold', !isInfo && 'mr-1.5 md:mr-5') }
@@ -46,7 +48,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 						height={ 20 }
 						priority
 					/> }
-					<a href={ `tel:${ item.url }` } className='ml-1 md:ml-2.5 text-gray-600'>
+					<a href={ `tel:${ item.url }` } className='ml-1 md:ml-2.5'>
 						{ item.phone }
 					</a>
 				</div>

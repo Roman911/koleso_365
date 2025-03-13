@@ -3,6 +3,7 @@ import { Link } from '@/i18n/routing';
 import { FC, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@heroui/button';
+import { RadioGroup, Radio } from '@heroui/radio';
 import ImagesBlock from './ImagesBlock';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { changeSection } from '@/store/slices/filterSlice';
@@ -21,7 +22,7 @@ import QuickOrder from '@/components/Product/QuickOrder';
 import CharacteristicsBlock from '@/components/Product/CharacteristicsBlock';
 import InfoBlock from '@/components/Product/InfoBlock';
 import { SettingsProps } from '@/models/settings';
-import {RadioGroup, Radio} from "@heroui/radio";
+import * as Icons from '@/components/UI/Icons';
 
 interface Props {
 	idProduct: string
@@ -89,7 +90,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 
 	return (
 		<section className='product-page flex flex-col lg:flex-row justify-between gap-1 xl:gap-x-6 mt-4 md:mt-6'>
-			<div className='flex-1 pr-3 xl:pr-5'>
+			<div className='flex-1 md:pr-3 xl:pr-5'>
 				{ data.result &&
 					<div className='flex flex-col md:flex-row items-center md:items-start md:border-b border-gray-200'>
 						<ImagesBlock
@@ -105,22 +106,23 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 						<div className='flex-1 md:ml-6 xl:ml-10'>
 							<h1 className='text-2xl font-bold mt-8 md:mt-0'>{ full_name }</h1>
 							<div className='flex mt-4 items-center'>
-								<div
-									className='text-[15px] text-gray-700 bg-gray-300 rounded-full py-1 md:py-1 px-3 mr-5'>Артикул: { offer_group.sku }</div>
+								<div className='text-[15px] text-gray-500 bg-gray-300 rounded-full py-1 md:py-1 px-3 mr-5'>
+									Артикул: { offer_group.sku }
+								</div>
 								<Rating
 									commentsCount={ review ? (review.length > 0 ? review.length : undefined) : undefined }
 									commentsAvgRate={ averageScore || 0 }
 								/>
 							</div>
-							<div className='flex justify-between mt-4 md:mt-5'>
+							<div className='flex justify-between mt-4 md:mt-6'>
 								<div>
 									<div className='flex items-end'>
-										<div className='mr-2.5 text-xl font-medium'>{ t('from') }</div>
-										<div className='text-4xl font-bold mr-2.5'>{ offer?.price } ₴</div>
+										<div className='mr-2.5 text-xl font-medium lowercase'>{ t('price') }</div>
+										<div className='text-4xl font-bold mr-2.5'>{ offer && +offer?.price } ₴</div>
 										<div className='text-xl font-medium'>/шт.</div>
 									</div>
 									<div className='mt-3 text-gray-500'>
-										{ t('from') } <span className='font-bold'>{ min_price * 4 } ₴ </span> за 4 шт.
+										{ t('price') } <span className='font-bold'>{ min_price * 4 } ₴ </span> за 4 шт.
 									</div>
 								</div>
 								<ActionsBlock className='hidden md:flex' id={ id } section={ section } quantity={ quantity } productName={ full_name } />
@@ -129,27 +131,31 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 								<RadioGroup color='primary' value={ offerId } onValueChange={ handleChange } size='lg'>
 									{ offers.map(item => {
 										return <Radio color='primary' key={ item.offer_id } value={ `${item.offer_id}` } classNames={{
-											control: 'h-4 w-4',
+											control: 'h-3 w-3',
 											wrapper: 'bg-white',
 											labelWrapper: 'w-full'
 										}}
-											className='bg-white md:bg-transparent border md:border-0 rounded-full mt-2 md:mt-0 w-full max-w-full'
+											className='bg-white md:bg-transparent border md:border-0 rounded-full ml-0 mt-2 md:mt-0 w-full max-w-full'
 										>
 											<div
-												className='grid-cols-9 grid md:grid-cols-9 w-full gap-1 md:gap-2 items-center md:min-w-[460px]'
+												className='grid-cols-10 grid md:grid-cols-9 w-full gap-1 md:gap-2 items-center md:min-w-[460px]'
 											>
-												<div className='font-medium col-span-2 md:col-span-2'>
+												<div className='font-medium col-span-1 md:col-span-1 text-sm md:ml-3'>
 													{ item.quantity } шт.
 												</div>
-												<div className='country col-span-3 md:col-span-4'>
+												<div className='country col-span-2 md:col-span-3'>
 													<CountryInfo
 														country={ locale === Language.UK ? item.country : item.country_ru }
 														countryCode={ countryCodeTransform(item.country) } year={ item.year }
 														mobileHidden={ true }
 													/>
 												</div>
-												<div className='price col-span-4 md:col-span-3 font-bold content-center'>
-													{ item.price } грн
+												<div className='storage col-span-4 md:col-span-3 text-sm text-gray-600 content-center flex items-center gap-x-1 md:gap-x-2'>
+													<Icons.MarkerIcon className='fill-gray-600 w-6' />
+													{ locale === Language.UK ? item.posts.city : item.posts.city_ru }
+												</div>
+												<div className='price col-span-3 md:col-span-2 font-bold content-center text-sm'>
+													{ +item.price } грн
 												</div>
 											</div>
 										</Radio>

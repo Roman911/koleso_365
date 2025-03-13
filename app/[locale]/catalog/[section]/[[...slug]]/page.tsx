@@ -71,7 +71,7 @@ export default async function Catalog({ params }: { params: Promise<{ locale: La
 			<HeaderCatalog section={ section } slug={ slug } />
 			<div className='py-5 lg:flex lg:gap-10'>
 				<FilterAlt filterData={ filterData } section={ section } />
-				<div className='flex-1 -mt-8 lg:-mt-12'>
+				<div className='flex-1 lg:-mt-5'>
 					<FilterByCar />
 					<SelectionByCar />
 					<FilterActive locale={ locale } className='hidden lg:flex' slug={ slug } />

@@ -16,7 +16,7 @@ const Offer = () => {
 					priority
 				/>
 			</div>
-			<h4 className='text-xs md:text-medium uppercase font-bold text-gray-600'>{t('free battery delivery')}</h4>
+			<h4 className='text-xs md:text-medium uppercase font-bold text-gray-700'>{t('free battery delivery')}</h4>
 			<div className='border-b-2 border-white border-dashed w-3 md:w-16'/>
 			<div className='w-5'>
 				<Image

@@ -17,6 +17,8 @@ const Contacts: FC<Props> = ({ settings }) => {
 		{ phone: settings.ua.config_telephone_life, url: settings.ua.config_telephone_life_url, logo: 'life' },
 	];
 
+	const filterTelephones = telephones.filter(i => i.phone);
+
 	return (
 		<Dropdown>
 			<DropdownTrigger className='md:hidden'>
@@ -27,7 +29,7 @@ const Contacts: FC<Props> = ({ settings }) => {
 					<Icons.ChevronDownIcon className='h-2 w-2 stroke-black' />
 				</Button>
 			</DropdownTrigger>
-			<DropdownMenu aria-label="Dynamic Actions" items={telephones}>
+			<DropdownMenu aria-label="Dynamic Actions" items={filterTelephones}>
 				{(item) => (
 					<DropdownItem
 						key={ item.phone }
