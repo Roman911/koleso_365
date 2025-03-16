@@ -1,5 +1,5 @@
 'use client'
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import * as Icons from '@/components/UI/Icons';
 import { Button } from '@heroui/button';
@@ -18,29 +18,36 @@ interface Props {
 }
 
 const CallbackModal: FC<Props> = ({ id, quantity }) => {
+	const [ phoneErrorMessage, setPhoneErrorMessage ] = useState<string | null>(null);
 	const t = useTranslations('CallbackModal');
 	const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 	const [ createCallback, { isLoading } ] = baseDataAPI.useCreateCallbackMutation();
 
 	const onSubmit = async(event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		setPhoneErrorMessage(null);
 		const formData = new FormData(event.currentTarget);
 		const phone = formData.get('phone') as string;
+		const phoneTransform = formatPhoneNumber(phone);
 
-		await createCallback({
-			phone: formatPhoneNumber(phone),
-			product_id: id?.toString(),
-			quantity,
-		}).then((response: { data?: { result: boolean }; error?: FetchBaseQueryError | SerializedError }) => {
-			if(response?.data?.result) {
-				addToast({
-					title: t('our manager'),
-				});
-				onClose();
-			} else if(response.error) {
-				console.error('An error occurred:', response.error);
-			}
-		});
+		if(phoneTransform.length < 13) {
+			setPhoneErrorMessage('enter your phone number');
+		} else {
+			await createCallback({
+				phone: formatPhoneNumber(phone),
+				product_id: id?.toString(),
+				quantity,
+			}).then((response: { data?: { result: boolean }; error?: FetchBaseQueryError | SerializedError }) => {
+				if(response?.data?.result) {
+					addToast({
+						title: t('our manager'),
+					});
+					onClose();
+				} else if(response.error) {
+					console.error('An error occurred:', response.error);
+				}
+			});
+		}
 	}
 
 	return (
@@ -65,7 +72,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 									<p className="text-sm text-gray-500">
 										{ t('put phone') }
 									</p>
-									<PhoneMaskInput/>
+									<PhoneMaskInput phoneErrorMessage={ phoneErrorMessage } />
 									<Button type='submit' color='primary' radius='full' size='lg' isLoading={ isLoading }
 													className='uppercase font-bold'>
 										{ t('send') }
