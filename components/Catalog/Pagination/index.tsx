@@ -25,7 +25,7 @@ const MyPagination: FC<Props> = ({ initialPage, total }) => {
 			total={ total }
 			variant='bordered'
 			onChange={ onchange }
-			classNames={{ cursor: 'text-black' }}
+			radius='full'
 		/>
 	)
 };

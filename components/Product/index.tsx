@@ -35,7 +35,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 	const [ quantity, setQuantity ] = useState(1);
 	const { cartItems } = useAppSelector(state => state.cartReducer);
 	const t = useTranslations('Main');
-	const { id = 0, full_name = '', offers = [], min_price = 0, photo, model, labels, offer_group } = data?.data || {};
+	const { id = 0, full_name = '', offers = [], photo, model, labels, offer_group } = data?.data || {};
 	const offer = offers.find(item => item.offer_id === +offerId);
 	const review = data?.data.review;
 	const commentsAvgRateSum = review && review.length > 0
@@ -117,9 +117,9 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 										<div className='text-4xl font-bold mr-2.5'>{ offer && +offer?.price } ₴</div>
 										<div className='text-xl font-medium'>/шт.</div>
 									</div>
-									<div className='mt-3 text-gray-500'>
-										{ t('price') } <span className='font-bold'>{ min_price * 4 } ₴ </span> за 4 шт.
-									</div>
+									{ section !== Section.Battery && <div className='mt-3 text-gray-500 font-semibold text-sm'>
+										* { t(section === Section.Disks ? 'price one disk' : 'price one tire') }
+									</div> }
 								</div>
 								<ActionsBlock className='hidden md:flex' id={ id } section={ section } quantity={ quantity } productName={ full_name } />
 							</div>

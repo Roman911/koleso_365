@@ -57,7 +57,7 @@ export default function Search() {
 				total={ Math.ceil(data?.data.total_count / itemsProduct) }
 				variant='bordered'
 				onChange={ onchange }
-				classNames={ { cursor: 'text-black' } }
+				radius='full'
 			/>
 		</div> }
 	</LayoutWrapper>

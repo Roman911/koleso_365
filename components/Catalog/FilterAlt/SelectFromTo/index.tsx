@@ -47,7 +47,7 @@ export const SelectFromTo: FC<SelectFromTo> = ({ nameMin, nameMax, from, to, tit
 		<div className='text-sm font-bold text-gray-500 uppercase'>{ title }</div>
 		<div className='flex gap-2 mt-3'>
 			<Input
-				className='max-w-36'
+				className='max-w-32'
 				placeholder={ `${ t('from') } ${ from }` }
 				maxLength={ 6 }
 				value={ minMax.min }
@@ -56,7 +56,7 @@ export const SelectFromTo: FC<SelectFromTo> = ({ nameMin, nameMax, from, to, tit
 				onChange={ event => onChange('min', event.target.value) }
 			/>
 			<Input
-				className='max-w-36'
+				className='max-w-32'
 				placeholder={ `До ${ to }` }
 				maxLength={ 6 }
 				value={ minMax.max }

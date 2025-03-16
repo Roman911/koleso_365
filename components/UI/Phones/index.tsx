@@ -31,7 +31,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 			{ filterTelephones.map((item, index) => {
 				return <div
 					key={ index }
-					className={ twMerge('flex items-center my-0.5 text-sm font-bold', !isInfo && 'mr-1.5 md:mr-5') }
+					className={ twMerge('flex items-center my-0.5 text-sm', !isInfo && 'mr-1.5 md:mr-5') }
 				>
 					{ item.logo && <Image
 						src={ `/icons/${item.logo}-logo.svg` }

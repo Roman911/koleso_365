@@ -23,10 +23,12 @@ const SwitchTabs = ({ section }: { section: Section }) => {
 	};
 
 	return (
-		<div className='filter-tabs grid grid-cols-3 gap-2.5 -mb-0.5'>
-			{ renderTab(Section.Tires) }
-			{ renderTab(Section.Disks) }
-			{ renderTab(Section.Battery) }
+		<div className='filter lg:h-auto w-[calc(100%-70px)] lg:w-full pt-4 lg:pt-0 bg-white lg:bg-transparent'>
+			<div className='filter-tabs grid grid-cols-3 gap-2.5 -mb-0.5'>
+				{ renderTab(Section.Tires) }
+				{ renderTab(Section.Disks) }
+				{ renderTab(Section.Battery) }
+			</div>
 		</div>
 	)
 };

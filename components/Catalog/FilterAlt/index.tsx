@@ -43,10 +43,7 @@ const FilterAlt: FC<Props> = ({ filterData, section }) => {
 		<div>
 			<FilterBtn openFilter={ onOpen } title={ t('filters') }/>
 			<div className='hidden md:block'>
-				<div
-					className='filter lg:h-auto w-[calc(100%-70px)] lg:w-64 mr-6 pt-4 lg:pt-0 bg-white lg:bg-transparent'>
-					<SwitchTabs section={ section }/>
-				</div>
+				<SwitchTabs section={ section }/>
 				<div
 					className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-200 z-10 overflow-y-auto md:overflow-y-visible'>
 					<SubmitFloat element={ element } btnTitle={ t('to apply') } setElement={ setElement } offset={ Section.Battery ? 354 : 360 }/>

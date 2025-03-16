@@ -122,7 +122,7 @@ const ActionsBlock: FC<ActionsBlockProps> = ({ id, className, section, quantity,
 			</div>
 			<Button onPress={ handleClickBookmarks } isIconOnly aria-label='mail' className='bg-gray-300 rounded-full group'>
 				<Icons.HeartIcon
-					className={ twMerge('stroke-black group-hover:stroke-primary', isBookmarks && 'fill-primary stroke-primary') }/>
+					className={ twMerge('w-4 h-4 stroke-black group-hover:stroke-primary', isBookmarks && 'fill-primary stroke-primary') }/>
 			</Button>
 		</div>
 	)

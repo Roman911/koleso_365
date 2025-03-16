@@ -53,7 +53,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 	return (
 		<>
 			<Button onPress={ onOpen } isIconOnly aria-label='mail' className='bg-gray-300 rounded-full group'>
-				<Icons.PhoneCircuitIcon className='stroke-black group-hover:stroke-primary'/>
+				<Icons.PhoneCircuitIcon className='w-4 h-4 stroke-black group-hover:stroke-primary'/>
 			</Button>
 			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange }>
 				<ModalContent>

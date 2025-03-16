@@ -37,7 +37,7 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 	const link = (link: string, title: string, index: number) => {
 		return <Link
 			key={ index }
-			className='text-white block text-sm font-medium mt-4 transition hover:text-primary hover:underline'
+			className='text-white block text-sm font-medium mt-4 transition hover:text-white hover:underline'
 			href={ link }
 		>
 			{ title }
@@ -65,7 +65,7 @@ const Footer: FC<Props> = ({ alias, settings }) => {
 				</p>
 			</div>
 			<div>
-				<h6 className='text-gray-500 text-sm font-bold'>
+				<h6 className='text-gray-500 text-sm font-bold mb-7'>
 					{ t('contacts') }
 				</h6>
 				<Phones settings={ settings } isInfo={ false } className='flex-col items-start gap-4 text-white font-normal' />

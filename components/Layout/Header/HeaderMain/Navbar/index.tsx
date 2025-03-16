@@ -34,7 +34,7 @@ const Navbar = () => {
 			type='button'
 			onClick={ event => handleClick(event, sectionItem) }
 			className={
-				twMerge('inline-flex items-center gap-x-1.5 font-semibold group transition hover:text-primary outline-none',
+				twMerge('inline-flex items-center gap-x-1.5 font-semibold group transition hover:text-primary outline-none uppercase text-medium',
 					(open && section === sectionItem) && 'text-primary'
 				) }
 		>
@@ -62,7 +62,7 @@ const Navbar = () => {
 					})}
 				{ links.map((item, index) => {
 					return <Link key={ index } href={ item.url }
-											 className='font-semibold hover:text-primary'>
+											 className='font-semibold hover:text-primary uppercase text-medium'>
 						{ t(item.title) }
 					</Link>
 				}) }

@@ -47,7 +47,7 @@ const AddAskModal: FC<Props> = ({ id, productName }) => {
 	return (
 		<>
 			<Button onPress={ onOpen } isIconOnly aria-label='mail' className='bg-gray-300 rounded-full group'>
-				<Icons.MailIcon className='stroke-black group-hover:stroke-primary'/>
+				<Icons.MailIcon className='w-4 h-4 stroke-black group-hover:stroke-primary'/>
 			</Button>
 
 			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange }>
