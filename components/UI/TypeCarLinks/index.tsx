@@ -75,7 +75,7 @@ const LinkComponent: FC<ILinkComponent> = (
 		}/>
 		<span className={
 			twMerge(
-				'transition group-hover:text-primary',
+				'transition group-hover:text-primary text-sm md:text-medium',
 				section === 'catalog' && 'text-sm font-bold text-gray-500',
 				section === 'header' && 'group-hover:underline',
 				active && 'text-primary',

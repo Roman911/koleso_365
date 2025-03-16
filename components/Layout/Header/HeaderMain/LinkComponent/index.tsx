@@ -28,7 +28,7 @@ const LinkComponent: FC<Props> = ({ href, onClick, img, label, mt, border }) => 
 			height={ 24 }
 			priority
 		/> }
-		<span className={ twMerge(!border && 'transition group-hover:text-primary group-hover:underline') }>
+		<span className={ twMerge(!border && 'transition group-hover:text-primary group-hover:underline text-sm md:text-medium') }>
 			{ label }
 		</span>
 	</Link>

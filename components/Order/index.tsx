@@ -20,6 +20,7 @@ interface OrderProps {
 	cartItems: { id: number; quantity: number }[]
 	onChange: (name: string, value: number | string | null) => void
 	dataOrdersParam: OrdersParamProps | undefined
+	phoneErrorMessage: string | null
 }
 
 const OrderComponent: FC<OrderProps> = (
@@ -32,6 +33,7 @@ const OrderComponent: FC<OrderProps> = (
 		shippingMethod,
 		dataOrdersParam,
 		showNpWarehouses,
+		phoneErrorMessage
 	}) => {
 	const locale = useLocale();
 	const t = useTranslations('Order');
@@ -52,14 +54,14 @@ const OrderComponent: FC<OrderProps> = (
 				</h3>
 				<Input
 					isRequired
-					errorMessage={ t('enter valid email') }
+					errorMessage={ t('error text') }
 					label={ t('firstname') }
 					name='firstname'
 					type='text'
 				/>
 				<Input
 					isRequired
-					errorMessage={ t('enter valid email') }
+					errorMessage={ t('error text') }
 					label={ t('lastname') }
 					name='lastname'
 					type='text'
@@ -69,7 +71,7 @@ const OrderComponent: FC<OrderProps> = (
 					name='surname'
 					type='text'
 				/>
-				<PhoneMaskInput/>
+				<PhoneMaskInput phoneErrorMessage={ phoneErrorMessage } />
 				<Input
 					errorMessage={ t('enter valid email') }
 					label={ t('email') }

@@ -2,16 +2,8 @@ import { FC } from 'react';
 import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { SettingsProps } from '@/models/settings';
+import * as Icons from  '../Icons';
 import type { PhoneLogo } from '@/models/config';
-import kievstarLogo from '@/public/icons/kievstar-logo.svg';
-import lifecellLogo from '@/public/icons/life-logo.svg';
-import vodafoneLogo from '@/public/icons/vodafone-logo.svg';
-
-const phoneLogos: Record<PhoneLogo, string> = {
-	kievstar: kievstarLogo,
-	lifecell: lifecellLogo,
-	vodafone: vodafoneLogo,
-};
 
 interface Props {
 	isInfo: boolean
@@ -27,7 +19,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 	}[] = [
 		{ phone: settings.ua.config_telephone_vodafone, url: settings.ua.config_telephone_vodafone_url, logo: 'vodafone' },
 		{ phone: settings.ua.config_telephone_kievstar, url: settings.ua.config_telephone_kievstar_url, logo: 'kievstar' },
-		{ phone: settings.ua.config_telephone_life, url: settings.ua.config_telephone_life_url, logo: 'lifecell' },
+		{ phone: settings.ua.config_telephone_life, url: settings.ua.config_telephone_life_url, logo: 'life' },
 	];
 
 	const filterTelephones = telephones.filter(i => i.phone);
@@ -42,7 +34,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 					className={ twMerge('flex items-center my-0.5 text-sm font-bold', !isInfo && 'mr-1.5 md:mr-5') }
 				>
 					{ item.logo && <Image
-						src={ phoneLogos[item.logo] }
+						src={ `/icons/${item.logo}-logo.svg` }
 						alt={ item.logo }
 						width={ 20 }
 						height={ 20 }
@@ -51,6 +43,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 					<a href={ `tel:${ item.url }` } className='ml-1 md:ml-2.5'>
 						{ item.phone }
 					</a>
+					{ item.logo === 'life' && <Icons.ViberIcon className='ml-2 h-5 w-5 fill-[#775bbc]' /> }
 				</div>
 			}) }
 		</div>

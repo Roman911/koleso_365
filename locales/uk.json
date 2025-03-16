@@ -67,6 +67,7 @@
     "buses": "Буси",
     "buy": "Купити",
     "capacity": "Ємність",
+    "capacity ah": "Ємність, Ah (A/год)",
     "car brand": "Марка авто",
     "car type": "Тип автомобіля",
     "cargo": "Вантажні",
@@ -89,6 +90,7 @@
     "graduation year": "Рік випуску",
     "height": "Висота",
     "high-voltage": "напруга",
+    "high-voltage v": "напруга, V",
     "homologation": "Омологація",
     "length": "Довжина",
     "light": "Легкові",
@@ -109,6 +111,7 @@
     "special equipment": "Спецтехніка",
     "speed index": "Індекс швидкості",
     "starting current": "Пусковий струм",
+    "starting current a": "Пусковий струм, A",
     "strengthening": "Посилення",
     "summer": "Літні",
     "suvs": "Позашляховики",
@@ -116,6 +119,7 @@
     "tires": "Шини",
     "to apply": "Застосувати",
     "type": "Тип",
+    "type akb": "Тип АКБ",
     "type size": "Типорозмір",
     "width": "Ширина",
     "winter": "Зимові",
@@ -273,7 +277,8 @@
     "specify city": "Вкажіть місто",
     "specify quantity": "Вкажіть кількість",
     "close": "Закрити",
-    "calculate": "Розрахувати"
+    "calculate": "Розрахувати",
+    "change": "Змінити"
   },
   "OurAdvantages": {
     "our advantages": "Наші переваги",
@@ -289,5 +294,9 @@
   "Cart": {
     "total payable": "Разом до сплати",
     "place an order": "Оформити замовлення"
+  },
+  "PhoneMask": {
+    "phone number": "Номер телефону",
+    "enter your phone number": "Введіть номер телефону"
   }
 }

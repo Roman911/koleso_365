@@ -48,7 +48,7 @@ export default async function Product({ params }: { params: Promise<{ locale: La
 	const idProduct = match ? match[1] : '';
 	const productResponse = await getProduct(idProduct);
 	const settings = await getSettings();
-	const section = /dia/.test(product) ? Section.Disks : Section.Tires;
+	const section = /dia/.test(product) ? Section.Disks : /ah/.test(product)? Section.Battery : Section.Tires;
 
 	const path = [
 		{

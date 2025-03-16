@@ -1,4 +1,4 @@
-export type PhoneLogo = 'kievstar' | 'lifecell' | 'vodafone';
+export type PhoneLogo = 'kievstar' | 'life' | 'vodafone';
 
 interface SocialItem {
 	link: string

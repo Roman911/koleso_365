@@ -1,5 +1,5 @@
 'use client'
-import { FC, useState } from 'react';
+import { FC, useState, Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Button } from '@heroui/button';
@@ -11,11 +11,13 @@ import NpDocumentPrice from '@/components/UI/NpDocumentPrice';
 
 interface Props {
 	offer_id?: number
+	quantity: number
+	price: number
+	setQuantity: Dispatch<SetStateAction<number>>
 }
 
-const DeliveryCalculation: FC<Props> = ({ offer_id }) => {
+const DeliveryCalculation: FC<Props> = ({ offer_id, quantity, price, setQuantity }) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
-	const [ quantity, setQuantity ] = useState(1);
 	const { city } = useAppSelector(state => state.orderReducer);
 	const [ showDescription, setShowDescription ] = useState<boolean>(false);
 	const t = useTranslations('Delivery calculation');
@@ -34,6 +36,10 @@ const DeliveryCalculation: FC<Props> = ({ offer_id }) => {
 		const numericValue = Number(onlyNumbers);
 
 		setQuantity(numericValue < 99 ? numericValue : 99);
+	}
+
+	const onReset = () => {
+		setShowDescription(false);
 	}
 
 	return (
@@ -59,7 +65,7 @@ const DeliveryCalculation: FC<Props> = ({ offer_id }) => {
 								<div className="mt-3 sm:ml-4 sm:mt-0 sm:text-left">
 									<div className='mt-6 mb-4'>
 										{ !showDescription && <>
-											<p className='mt-4'>
+											<p className='mt-4 mb-2'>
 												{ t('specify city') }
 											</p>
 											<NpCitySearch />
@@ -74,11 +80,14 @@ const DeliveryCalculation: FC<Props> = ({ offer_id }) => {
 												setQuantity={ onSetQuantity }
 											/>
 										</> }
-										{ showDescription && city.value.length > 0 && <NpDocumentPrice offer_id={ offer_id } quantity={ quantity } /> }
+										{ showDescription && city.value.length > 0 && <NpDocumentPrice offer_id={ offer_id } quantity={ quantity } price={ price } /> }
 									</div>
 								</div>
 							</ModalBody>
 							<ModalFooter>
+								{ showDescription && <Button color='primary' size='lg' variant='light' className='w-max px-5 uppercase font-bold' onPress={ onReset }>
+									{ t('change') }
+								</Button> }
 								{ showDescription ? <Button onPress={ onClose } color='primary' radius='full' size='lg' className='w-max px-5 uppercase font-bold'>
 									{ t('close') }
 								</Button> : <Button onPress={ handleClick } color='primary' radius='full' size='lg' className='w-max px-5 uppercase font-bold'>

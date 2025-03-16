@@ -57,12 +57,12 @@ const HeaderMain: FC<Props> = ({ settings }) => {
 			<NavbarContent className={ styles.search }>
 				<Search />
 			</NavbarContent>
-			<NavbarContent justify='end' className='px-4'>
+			<NavbarContent justify='end' className='px-2 md:px-4 gap-3 md:gap-4'>
 				<Contacts settings={ settings } />
 				<ButtonBlock />
 				<NavbarMenuToggle className="sm:hidden" aria-label={ isMenuOpen ? "Close menu" : "Open menu" }/>
 			</NavbarContent>
-			<NavbarMenu className={ twMerge('mt-6 bg-white pt-16', styles.menu) }>
+			<NavbarMenu className={ twMerge('mt-6 bg-white pt-16 px-2', styles.menu) }>
 				<NavbarMenuItem>
 					<button
 						onClick={ () => handleClick('tires') }
@@ -72,11 +72,11 @@ const HeaderMain: FC<Props> = ({ settings }) => {
 						<span>{ t('cartires') }</span>
 						<span className={ twMerge('transition', filterIsOpen === 'tires' && 'rotate-180') }>
 						<Icons.ChevronDownIcon
-							className={ twMerge('stroke-black transition group-hover:stroke-primary', filterIsOpen === 'tires' && 'stroke-primary') }/>
+							className={ twMerge('stroke-black transition group-hover:stroke-primary w-4 h-4', filterIsOpen === 'tires' && 'stroke-primary') }/>
 					</span>
 					</button>
 					{ filterIsOpen === 'tires' &&
-						<div className='mt-4 grid grid-cols-2 gap-2'>
+						<div className='mt-4 px-4 grid grid-cols-2 gap-2'>
 							<CarTireFilter closeFilter={ closeFilter } />
 						</div>
 					}
@@ -90,11 +90,11 @@ const HeaderMain: FC<Props> = ({ settings }) => {
 						<span>{ t('cardiscs') }</span>
 						<span className={ twMerge('transition', filterIsOpen === 'disks' && 'rotate-180') }>
 						<Icons.ChevronDownIcon
-							className={ twMerge('stroke-black transition group-hover:stroke-primary', filterIsOpen === 'disks' && 'stroke-primary') }/>
+							className={ twMerge('stroke-black transition group-hover:stroke-primary w-4 h-4', filterIsOpen === 'disks' && 'stroke-primary') }/>
 					</span>
 					</button>
 					{ filterIsOpen === 'disks' &&
-						<div className='mt-5 grid grid-cols-2 gap-2'>
+						<div className='mt-4 px-4 grid grid-cols-2 gap-2'>
 							<CarDiskFilter closeFilter={ closeFilter } />
 						</div>
 					}

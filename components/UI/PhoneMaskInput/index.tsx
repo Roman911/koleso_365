@@ -1,10 +1,12 @@
 'use client'
 import { useState } from 'react';
 import { PatternFormat } from 'react-number-format';
+import { useTranslations } from 'next-intl';
 import { Input } from '@heroui/input';
 
-const PhoneMaskInput = () => {
-	const [ phone, setPhone ] = useState('');
+const PhoneMaskInput = ({ phoneErrorMessage }: { phoneErrorMessage: null | string }) => {
+	const t = useTranslations('PhoneMask');
+	const [ phone, setPhone ] = useState<string | null>(null);
 
 	const handleChangeAmount = (values: { value: string }) => {
 		setPhone(values.value);
@@ -12,7 +14,11 @@ const PhoneMaskInput = () => {
 
 	return (
 		<PatternFormat
-			format="+38 (###)###-##-##" allowEmptyFormatting mask="_"
+			label={ t('phone number') }
+			isRequired
+			isInvalid={!!phoneErrorMessage && phone?.length !== 10}
+			errorMessage={ t(phoneErrorMessage) }
+			format="+38 (###)###-##-##" allowEmptyFormatting mask='_'
 			value={ phone }
 			onValueChange={ handleChangeAmount }
 			customInput={ Input }

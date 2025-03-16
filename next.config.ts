@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
 	env: {
 		SERVER_URL: process.env.SERVER_URL,
+		HOSTNAME: process.env.HOSTNAME,
+		HOSTNAME_TYRECLUB: process.env.HOSTNAME,
 		ACCESS_ORIGIN: process.env.ACCESS_ORIGIN,
 	},
 	sassOptions: {
@@ -15,12 +17,12 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'opt.tyreclub.com.ua',
+				hostname: process.env.HOSTNAME_TYRECLUB || 'localhost',
 				pathname: '/api/public/img/user/**',
 			},
 			{
 				protocol: 'https',
-				hostname: 'admin.topkoleso.com.ua',
+				hostname: process.env.HOSTNAME || 'localhost',
 				pathname: '/storage/**',
 			},
 		],

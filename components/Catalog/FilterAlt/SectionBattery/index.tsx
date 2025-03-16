@@ -18,7 +18,7 @@ const SectionBattery: FC<Props> = ({ onChange }) => {
 		<>
 			<Select
 				name='jemnist'
-				label='capacity'
+				label='capacity ah'
 				options={ dataAkum?.jemnist.map(item => ({value: item.value, label: item.value, p: item.p})) || []}
 				variant='gray'
 				onChange={ onChange }
@@ -27,7 +27,7 @@ const SectionBattery: FC<Props> = ({ onChange }) => {
 			/>
 			<Select
 				name='puskovii_strum'
-				label='starting current'
+				label='starting current a'
 				options={ dataAkum?.['puskovii-strum'].map(item => ({value: item.value, label: item.value, p: item.p})) || []}
 				variant='gray'
 				onChange={ onChange }
@@ -36,7 +36,7 @@ const SectionBattery: FC<Props> = ({ onChange }) => {
 			/>
 			<Select
 				name='tip_elektrolitu'
-				label='type of electrolyte'
+				label='type akb'
 				options={ dataAkum?.['tip-elektrolitu'].map(item => ({value: item.value, label: item.value, p: item.p})) || []}
 				variant='gray'
 				onChange={ onChange }
@@ -68,7 +68,7 @@ const SectionBattery: FC<Props> = ({ onChange }) => {
 										title={`${t('length')} (см)`} btnTitle={t('to apply')} />
 			<Select
 				name='napruga'
-				label='high-voltage'
+				label='high-voltage v'
 				options={ dataAkum?.napruga.map(item => ({value: item.value, label: item.value, p: item.p})) || []}
 				variant='gray'
 				onChange={ onChange }

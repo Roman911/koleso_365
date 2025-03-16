@@ -22,6 +22,7 @@ export default function Order() {
 	const [ loadingBtn, setLoadingBtn ] = useState(false);
 	const [ shippingMethod, setShippingMethod ] = useState<number | string | null>(1);
 	const [ paymentMethod, setPaymentMethod ] = useState<number | string | null>(1);
+	const [ phoneErrorMessage, setPhoneErrorMessage ] = useState<string | null>(null);
 	const { cartItems } = useAppSelector(state => state.cartReducer);
 	const { city, wirehouse } = useAppSelector(state => state.orderReducer);
 	const { tires, cargo, disks, battery, isLoading } = useAppGetProducts(cartItems, 'reducerCart', true);
@@ -70,51 +71,57 @@ export default function Order() {
 
 	const onSubmit = async(event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		setPhoneErrorMessage(null);
 		const formData = new FormData(event.currentTarget);
+		const phone = formData.get('phone') as string;
+		const phoneTransform = formatPhoneNumber(phone);
 		const firstname = formData.get('firstname');
 		const lastname = formData.get('lastname');
 		const surname = formData.get('surname');
 		const email = formData.get('email');
-		const phone = formData.get('phone') as string;
 		const comment = formData.get('comment');
 		const address = formData.get('address');
-		setLoadingBtn(true);
-		await createOrder({
-			fast: 0,
-			firstname,
-			lastname,
-			surname,
-			email,
-			telephone: formatPhoneNumber(phone),
-			total,
-			comment: comment || 'null',
-			payment_method: paymentMethod,
-			shipping_method: shippingMethod,
-			payment_address_1: wirehouse.label || 'null',
-			payment_address_2: address || 'null',
-			payment_city: city.label,
-			ref_wirehouse: wirehouse.value,
-			ref_city: city.value,
-			products,
-		}).then((response: {
-			data?: { result: boolean, linkpay: string, order_id: number };
-			error?: FetchBaseQueryError | SerializedError
-		}) => {
-			const data = response?.data;
-			if(data) {
-				event.currentTarget.reset(); // Reset form fields
-				if(data?.linkpay?.length > 0) window.open(data?.linkpay, "_blank")
-				if(data?.result) {
-					dispatch(reset());
-					resetStorage('reducerCart');
-					router.push(`/${ params.locale }/order/successful`);
+
+		if(phoneTransform.length < 13) {
+			setPhoneErrorMessage('enter your phone number');
+		} else {
+			await createOrder({
+				fast: 0,
+				firstname,
+				lastname,
+				surname,
+				email,
+				telephone: phoneTransform,
+				total,
+				comment: comment || 'null',
+				payment_method: paymentMethod,
+				shipping_method: shippingMethod,
+				payment_address_1: wirehouse.label || 'null',
+				payment_address_2: address || 'null',
+				payment_city: city.label,
+				ref_wirehouse: wirehouse.value,
+				ref_city: city.value,
+				products,
+			}).then((response: {
+				data?: { result: boolean, linkpay: string, order_id: number };
+				error?: FetchBaseQueryError | SerializedError
+			}) => {
+				const data = response?.data;
+				if(data) {
+					event.currentTarget.reset(); // Reset form fields
+					if(data?.linkpay?.length > 0) window.open(data?.linkpay, "_blank")
+					if(data?.result) {
+						dispatch(reset());
+						resetStorage('reducerCart');
+						router.push(`/${ params.locale }/order/successful`);
+					}
+				} else if(response.error) {
+					console.error('An error occurred:', response.error);
 				}
-			} else if(response.error) {
-				console.error('An error occurred:', response.error);
-			}
-		}).finally(() => {
-			setLoadingBtn(false);
-		});
+			}).finally(() => {
+				setLoadingBtn(false);
+			});
+		}
 	}
 
 	const onChange = (name: string, value: number | string | null) => {
@@ -141,6 +148,7 @@ export default function Order() {
 					shippingMethod={ shippingMethod }
 					dataOrdersParam={ dataOrdersParam }
 					showNpWarehouses={ city.value?.length > 0 }
+					phoneErrorMessage={ phoneErrorMessage }
 				/>
 			</Form>
 		</div>

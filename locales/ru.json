@@ -67,6 +67,7 @@
     "buses": "Бусы",
     "buy": "Купить",
     "capacity": "Емкость",
+    "capacity ah": "Емкость, Ah (A/час)",
     "car brand": "Марка авто",
     "car type": "Тип автомобиля",
     "cargo": "Грузовые",
@@ -89,6 +90,7 @@
     "graduation year": "Год выпуска",
     "height": "Высота",
     "high-voltage": "напряжение",
+    "high-voltage v": "напряжение, V",
     "homologation": "Омологация",
     "length": "Длина",
     "light": "Легковые",
@@ -108,6 +110,7 @@
     "special equipment": "Спецтехника",
     "speed index": "Индекс скорости",
     "starting current": "Пусковой ток",
+    "starting current a": "Пусковой ток, A",
     "strengthening": "Усиление",
     "summer": "Летние",
     "suvs": "Внедорожники",
@@ -115,6 +118,7 @@
     "tires": "Шины",
     "to apply": "Применить",
     "type": "Тип",
+    "type akb": "Тип АКБ",
     "type size": "Типоразмер",
     "width": "Ширина",
     "winter": "Зимние",
@@ -272,7 +276,8 @@
     "specify city": "Укажите город",
     "specify quantity": "Укажите количество",
     "close": "Закрыть",
-    "calculate": "Рассчитать"
+    "calculate": "Рассчитать",
+    "change": "Изменить"
   },
   "OurAdvantages": {
     "our advantages": "Наши преимущества",
@@ -288,5 +293,9 @@
   "Cart": {
     "total payable": "Итого к оплате",
     "place an order": "Оформить заказ"
+  },
+  "PhoneMask": {
+    "phone number": "Номер телефона",
+    "enter your phone number": "Введите номер телефона"
   }
 }

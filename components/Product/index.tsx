@@ -3,7 +3,6 @@ import { Link } from '@/i18n/routing';
 import { FC, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@heroui/button';
-import { RadioGroup, Radio } from '@heroui/radio';
 import ImagesBlock from './ImagesBlock';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { changeSection } from '@/store/slices/filterSlice';
@@ -13,8 +12,6 @@ import { addToStorage, getFromStorage } from '@/lib/localeStorage';
 import ActionsBlock from '@/components/Product/ActionsBlock';
 import { Section } from '@/models/filter';
 import Rating from '@/components/UI/Rating';
-import CountryInfo from '@/components/UI/CountryInfo';
-import { countryCodeTransform } from '@/lib/countryCodetransform';
 import Quantity from '@/components/UI/Quantity';
 import DeliveryCalculation from '@/components/Product/DeliveryCalculation';
 import { addCart } from '@/store/slices/cartSlice';
@@ -22,7 +19,7 @@ import QuickOrder from '@/components/Product/QuickOrder';
 import CharacteristicsBlock from '@/components/Product/CharacteristicsBlock';
 import InfoBlock from '@/components/Product/InfoBlock';
 import { SettingsProps } from '@/models/settings';
-import * as Icons from '@/components/UI/Icons';
+import Offers from '@/components/Product/Offers';
 
 interface Props {
 	idProduct: string
@@ -57,17 +54,16 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 	}, [ data ]);
 
 	useEffect(() => {
+		if(section !== Section.Battery && data && offer && offer.quantity >= 4) setQuantity(4);
+	}, [data, offer, section]);
+
+	useEffect(() => {
 		if(data) {
 			if(section === 'disks') {
 				dispatch(changeSection(Section.Disks));
 			}
 		}
 	}, [ data, dispatch, section ]);
-
-	const handleChange = (value: string) => {
-		setOfferId(value);
-		setQuantity(1);
-	}
 
 	const onChange = (e: { target: HTMLInputElement }) => {
 		const value = e.target.value;
@@ -127,48 +123,14 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 								</div>
 								<ActionsBlock className='hidden md:flex' id={ id } section={ section } quantity={ quantity } productName={ full_name } />
 							</div>
-							<div className='offers mt-4 mb-5'>
-								<RadioGroup color='primary' value={ offerId } onValueChange={ handleChange } size='lg'>
-									{ offers.map(item => {
-										return <Radio color='primary' key={ item.offer_id } value={ `${item.offer_id}` } classNames={{
-											control: 'h-3 w-3',
-											wrapper: 'bg-white',
-											labelWrapper: 'w-full'
-										}}
-											className='bg-white md:bg-transparent border md:border-0 rounded-full ml-0 mt-2 md:mt-0 w-full max-w-full'
-										>
-											<div
-												className='grid-cols-10 grid md:grid-cols-9 w-full gap-1 md:gap-2 items-center md:min-w-[460px]'
-											>
-												<div className='font-medium col-span-1 md:col-span-1 text-sm md:ml-3'>
-													{ item.quantity } шт.
-												</div>
-												<div className='country col-span-2 md:col-span-3'>
-													<CountryInfo
-														country={ locale === Language.UK ? item.country : item.country_ru }
-														countryCode={ countryCodeTransform(item.country) } year={ item.year }
-														mobileHidden={ true }
-													/>
-												</div>
-												<div className='storage col-span-4 md:col-span-3 text-sm text-gray-600 content-center flex items-center gap-x-1 md:gap-x-2'>
-													<Icons.MarkerIcon className='fill-gray-600 w-6' />
-													{ locale === Language.UK ? item.posts.city : item.posts.city_ru }
-												</div>
-												<div className='price col-span-3 md:col-span-2 font-bold content-center text-sm'>
-													{ +item.price } грн
-												</div>
-											</div>
-										</Radio>
-									}) }
-								</RadioGroup>
-							</div>
+							<Offers locale={ locale } offerId={ offerId } offers={ offers } setOfferId={ setOfferId } setQuantity={ setQuantity } />
 						</div>
 					</div> }
 				<div className='purchase-information flex md:items-center justify-between flex-col md:flex-row gap-4 mt-5 md:mt-10'>
 					<div>
 						<Quantity id={ 0 } quantity={ quantity } offerQuantity={ (Number(offer?.quantity) || 0) }
 											price={ offer?.price } onChange={ onChange } setQuantity={ onSetQuantity }/>
-						<DeliveryCalculation offer_id={ +offerId }/>
+						<DeliveryCalculation offer_id={ +offerId } quantity={ quantity } setQuantity={ setQuantity } price={ offer ? +offer?.price : 0 } />
 					</div>
 					<div className='buttons-buy flex flex-col gap-2'>
 						{ cartItems.find(item => +item.id === +offerId) ?
