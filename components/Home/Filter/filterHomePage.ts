@@ -6,6 +6,7 @@ interface Filters {
 	label: string
 	name: string
 	options: Options[] | undefined
+	hidden?: string
 }
 
 export interface OnChange {

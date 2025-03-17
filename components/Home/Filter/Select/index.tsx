@@ -1,6 +1,7 @@
 'use client'
 import { FC } from 'react';
 import { useTranslations } from 'next-intl';
+import { twMerge } from 'tailwind-merge';
 import { Autocomplete, AutocompleteItem, AutocompleteSection } from '@heroui/autocomplete';
 import type { Options } from '@/models/baseData';
 import { Section } from '@/models/filter';
@@ -18,9 +19,10 @@ interface SelectProps {
 	onChange: (name: string, value: number | string | null, section: Section) => void
 	section: Section
 	color?: 'primary' | 'secondary'
+	hidden?: string
 }
 
-const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = false, onChange, section, color = 'primary' }) => {
+const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = false, onChange, section, color = 'primary', hidden = '' }) => {
 	const t = useTranslations('Select');
 	const popularSizeOptions =
 		section === Section.Tires ? popularSize.includes(name) && POPULAR_SIZE[name]
@@ -32,7 +34,7 @@ const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = fal
 
 	return <Autocomplete
 		color={ color || 'primary' }
-		className='max-w-full md:max-w-xs'
+		className={ twMerge('max-w-full md:max-w-xs', hidden ) }
 		classNames={{
 			popoverContent: 'rounded-none',
 			selectorButton: 'text-black',

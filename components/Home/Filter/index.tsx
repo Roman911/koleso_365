@@ -75,7 +75,7 @@ const Filter = () => {
 						<TiresFilter filters={ getAkumFilters({ data: dataAkum }) } onChange={ onChange } section={ Section.Battery }/>
 					</FilterBlock>
 				</AccordionItem>
-				<AccordionItem key='4' aria-label={ t('selection by car') } title={ t('selection by car') } className='bg-blue-800 rounded-3xl'
+				<AccordionItem key='4' aria-label={ t('selection tires by car') } title={ t('selection tires by car') } className='bg-blue-800 rounded-3xl'
 											 startContent={ <Icons.CarIcon className='fill-white' /> }>
 					<FilterBlock onSubmit={ submit } section={ Section.Tires } subsection={ subsection } className='md:hidden'>
 						<FilterByCar section={ Section.Tires } />

@@ -18,6 +18,7 @@ const TiresFilter: FC<FilterProps> = ({ filters, onChange, section, color }) => 
 				focusValue={ item.focusValue }
 				section={ section }
 				color={ color }
+				hidden={ item.hidden }
 			/>
 		}) }
 	</div>
