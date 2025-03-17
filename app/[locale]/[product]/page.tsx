@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { Section } from '@/models/filter';
 import { ProductProps } from '@/models/product';
 import Breadcrumbs from '@/components/UI/Breadcrumbs';
@@ -25,7 +26,12 @@ async function getProduct(id: string): Promise<ProductProps> {
 			'Access-Control-Allow-Credentials': 'true',
 		}
 	});
-	return await res.json();
+
+	if (!res.ok) {
+		redirect('/404');
+	} else {
+		return await res.json();
+	}
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ product: string }> }): Promise<Metadata> {
