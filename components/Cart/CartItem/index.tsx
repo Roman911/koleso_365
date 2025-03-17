@@ -51,16 +51,16 @@ const CartItem: FC<CartItemProps> = (
 		setQuantity(id,numericValue < offerQuantity ? numericValue : offerQuantity);
 	}
 
-	return <div className='flex flex-col md:flex-row py-4 items-center relative'>
+	return <div className='flex flex-col md:flex-row py-4 items-center relative border-b'>
 		<Link href={`/${pageUrl}`}>
 			<Image src={ default_photo } height={ 122 } width={ 122 } alt={ full_name } />
 		</Link>
 		<div className='flex flex-col md:flex-row justify-between items-center w-full ml-4 pr-4 mt-4 md:mt-0 md:pr-0'>
 			<div className='flex-1'>
-				<Link href={ `/${pageUrl}` } className='font-bold md:text-lg hover:text-primary transition'>
+				<Link href={ `/${pageUrl}` } className='font-bold md:text-medium hover:text-primary transition'>
 					{ full_name }
 				</Link>
-				<div className='font-bold text-xl mt-2'>{ price } ₴/шт.</div>
+				<div className='font-bold text-lg mt-2'>{ price } ₴/шт.</div>
 				<div className='text-sm text-gray-500 mt-1'>Арт: { sku }</div>
 				<div className='country mt-2 md:col-span-4'>
 					{ (country || year) && <CountryInfo

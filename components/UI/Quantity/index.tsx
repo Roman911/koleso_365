@@ -28,7 +28,7 @@ const Quantity: FC<QuantityProps> = ({ id = 0, price = 0, quantity, offerQuantit
 				className='p-2 w-10 text-center font-bold rounded-sm text-[#575C66] bg-gray-200 hover:bg-[#D2D3D6] transition'>+
 			</button>
 		</div>
-		{ price !== 0 && <div className='ml-6 text-4xl md:text-2xl font-bold'>
+		{ price !== 0 && <div className='ml-6 text-lg font-bold'>
 			{ +price * (quantity ?? 0) } ₴
 		</div> }
 	</div>

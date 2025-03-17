@@ -217,7 +217,9 @@
     "phones": "Телефоны",
     "in cart": "В корзине",
     "price one tire": "Цена указана за одну шину без диска",
-    "price one disk": "Цена указана за один диск без шины"
+    "price one disk": "Цена указана за один диск без шины",
+    "place an order": "Оформить заказ",
+    "continue shopping": "Продолжить покупки"
   },
   "QuickOrder": {
     "quick order": "Быстрый заказ",
