@@ -17,7 +17,7 @@ const PhoneMaskInput = ({ phoneErrorMessage }: { phoneErrorMessage: null | strin
 			label={ t('phone number') }
 			isRequired
 			isInvalid={!!phoneErrorMessage && phone?.length !== 10}
-			errorMessage={ t(phoneErrorMessage) }
+			errorMessage={ phoneErrorMessage && t(phoneErrorMessage) }
 			format="+38 (###)###-##-##" allowEmptyFormatting mask='_'
 			value={ phone }
 			onValueChange={ handleChangeAmount }

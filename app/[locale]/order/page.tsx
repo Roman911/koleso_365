@@ -108,9 +108,8 @@ export default function Order() {
 			}) => {
 				const data = response?.data;
 				if(data) {
-					event.currentTarget.reset(); // Reset form fields
-					if(data?.linkpay?.length > 0) window.open(data?.linkpay, "_blank")
-					if(data?.result) {
+					if(data.linkpay?.length > 0) window.open(data?.linkpay, "_blank")
+					if(data.result) {
 						dispatch(reset());
 						resetStorage('reducerCart');
 						router.push(`/${ params.locale }/order/successful`);
