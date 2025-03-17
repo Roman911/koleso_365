@@ -17,12 +17,12 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: process.env.HOSTNAME_TYRECLUB || 'localhost',
+				hostname: 'opt.tyreclub.com.ua',
 				pathname: '/api/public/img/user/**',
 			},
 			{
 				protocol: 'https',
-				hostname: process.env.HOSTNAME || 'localhost',
+				hostname: 'admin.koleso365.com.ua',
 				pathname: '/storage/**',
 			},
 		],
