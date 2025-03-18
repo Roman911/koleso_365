@@ -1,10 +1,12 @@
 'use client'
 import { FC } from 'react';
+import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { ScrollShadow } from '@heroui/scroll-shadow';
 import CartItem from './CartItem';
 import type { ProductsProps } from '@/models/products';
 import { Language } from '@/models/language';
+import { Button } from '@heroui/button';
 
 const totalQuantityLabel = {
 	1: {
@@ -26,9 +28,11 @@ interface CarProps {
 	removeProduct: (id: number) => void
 	cartItems: { id: number; quantity: number }[]
 	setQuantity: (id: number, quantity: number) => void
+	isCartPage?: boolean
 }
 
-const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuantity }) => {
+const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuantity, isCartPage }) => {
+	const router = useRouter();
 	const locale = useLocale();
 	const lang = locale === Language.UK ? Language.UK : Language.RU;
 	const t = useTranslations('Cart');
@@ -43,8 +47,12 @@ const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuanti
 	const totalQuantity = items?.length;
 	const totalQuantityPrice = items?.reduce((sum, item) => sum + (item.quantity ?? 0) * parseFloat(item.price), 0);
 
+	const handleClick = () => {
+		router.push(`/${ locale }/order`)
+	}
+
 	return <div className='flex flex-col bg-white p-2 rounded-sm shadow-sm gap-10'>
-		<ScrollShadow className='h-[400px] border rounded-lg px-4'>
+		<ScrollShadow className='max-h-[400px] border rounded-lg px-4'>
 			{ data?.data.products.map(item => {
 				const quantity = cartItems?.find(i => i.id === item.best_offer.id)?.quantity || 1;
 				return <CartItem
@@ -85,6 +93,11 @@ const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuanti
 				<div>{ t('total payable') }:</div>
 				<div>{ totalQuantityPrice } ₴</div>
 			</div>
+			{ isCartPage && <div className='mt-6 flex justify-end'>
+				<Button color='primary' size='lg' className='uppercase font-bold' radius='full' onPress={ handleClick }>
+					{ t('place an order') }
+				</Button>
+			</div> }
 		</div>
 	</div>
 };

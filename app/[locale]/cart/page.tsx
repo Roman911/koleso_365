@@ -44,6 +44,7 @@ export default function Cart() {
 					cartItems={ cartItems }
 					removeProduct={ removeProduct }
 					setQuantity={ onSetQuantity }
+					isCartPage={ true }
 				/> :
 				<NoResult noResultText='no product to cart' /> }
 		</Spinner>
