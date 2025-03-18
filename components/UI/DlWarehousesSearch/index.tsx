@@ -1,4 +1,5 @@
 'use client'
+import { useTranslations} from 'next-intl';
 import { baseDataAPI } from '@/services/baseDataService';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { setWirehouse } from '@/store/slices/orderSlice';
