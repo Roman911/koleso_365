@@ -7,6 +7,7 @@ import { Language } from '@/models/language';
 import PhoneMaskInput from '@/components/UI/PhoneMaskInput';
 import { NpCitySearch } from '@/components/UI/NpCitySearch';
 import { NpWarehousesSearch } from '@/components/UI/NpWarehousesSearch';
+import { DlWarehousesSearch } from '@/components/UI/DlWarehousesSearch';
 import MySelect from '@/components/UI/Select';
 import type { ProductsProps } from '@/models/products';
 import type { OrdersParamProps } from '@/models/ordersParam';
@@ -86,8 +87,9 @@ const OrderComponent: FC<OrderProps> = (
 						{ t('choose a delivery method') }
 					</h4>
 					<MySelect name='shipping_method' label={ t('delivery method') } options={ deliverysOptions } onChange={ onChange }/>
-					{ (shippingMethod === '2' || shippingMethod === '3') && <NpCitySearch/> }
+					{ (shippingMethod === '2' || shippingMethod === '3' || shippingMethod === '4') && <NpCitySearch/> }
 					{ shippingMethod === '2' && showNpWarehouses && <NpWarehousesSearch/> }
+					{ shippingMethod === '4' && showNpWarehouses && <DlWarehousesSearch/> }
 					{ shippingMethod === '3' && <Input
 						label={ t('address') }
 						name='address'

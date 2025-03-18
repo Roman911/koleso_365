@@ -140,9 +140,19 @@ export const baseDataAPI = createApi({
 				}
 			}),
 		}),
+		fetchDlSearch: build.query({
+			query: (name) => ({
+				url: `/api/delivery/cities/${name}`,
+			}),
+		}),
 		fetchNpWarehouses: build.query({
 			query: (ref) => ({
 				url: `/api/np/warehouses/${ref}`,
+			}),
+		}),
+		fetchDlWarehouses: build.query({
+			query: (ref) => ({
+				url: `/api/delivery/warehouses/${ref}`,
 			}),
 		}),
 		// fetchBanners: build.query<Banner[], string>({
