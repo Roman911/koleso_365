@@ -2,7 +2,9 @@
 import { useRef, useState, MouseEvent, SetStateAction } from 'react';
 import { useTranslations } from 'next-intl';
 import { twMerge } from 'tailwind-merge';
-import { Link } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
+import { useAppDispatch } from '@/hooks/redux';
+import { setProgress } from '@/store/slices/progressSlice';
 import { useClickOutside } from '@/hooks/clickOutside';
 import CarTireFilter from '../CarTireFilter';
 import CarDiskFilter from '../CarDiskFilter';
@@ -10,6 +12,8 @@ import * as Icons from '@/components/UI/Icons';
 import { links } from '../../links';
 
 const Navbar = () => {
+	const dispatch = useAppDispatch();
+	const pathname = usePathname();
 	const t = useTranslations('Main');
 	const [ open, setOpen ] = useState(false);
 	const [ section, setSection ] = useState('tires');
@@ -28,6 +32,12 @@ const Navbar = () => {
 			setSection(value);
 		}
 	};
+
+	const onclick = (href: string) => {
+		if(pathname !== href) {
+			dispatch(setProgress(true));
+		}
+	}
 
 	const ButtonMeu = ({ sectionItem, label }: { sectionItem: string, label: string }) => (
 		<button
@@ -61,10 +71,16 @@ const Navbar = () => {
 						return <ButtonMeu key={ i } sectionItem={ item.section } label={ item.label } />
 					})}
 				{ links.map((item, index) => {
-					return <Link key={ index } href={ item.url }
-											 className='font-semibold hover:text-primary uppercase text-medium'>
-						{ t(item.title) }
-					</Link>
+					return (
+						<Link
+							key={ index }
+							href={ item.url }
+							onClick={ () => onclick(item.url) }
+							className='font-semibold hover:text-primary uppercase text-medium'
+						>
+							{ t(item.title) }
+						</Link>
+					)
 				}) }
 			</nav>
 			<div

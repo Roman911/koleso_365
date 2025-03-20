@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image';
-import { FC, JSX } from 'react';
+import { FC, JSX, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useTranslations } from 'next-intl';
 import { Button } from '@heroui/button';
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, className }) => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
 	const t = useTranslations('Main');
 
@@ -32,6 +33,11 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 		if(section !== Section.Battery) {
 			dispatch(changeSubsection(value));
 		}
+	}
+
+	const onClick = () => {
+		setIsLoading(true);
+		onSubmit(section);
 	}
 
 	return (
@@ -80,13 +86,18 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 			</div>
 			{ children }
 			{ (subsection === Subsection.ByParams || section === Section.Battery) && <div className='mt-4 md:mt-10'>
-				<Button size='lg' radius='full' onPress={ () => onSubmit(section) }
-								className='uppercase w-full font-bold bg-white'>
+				<Button
+					isLoading={ isLoading }
+					size='lg'
+					radius='full'
+					onPress={ onClick }
+					className='uppercase w-full font-bold bg-white'
+				>
 					{ t('choose') }
 				</Button>
 			</div> }
 			<div className='mt-auto h-52 hidden md:flex justify-center items-end'>
-				<Image className='object-contain' width={ 500 } height={ 166 } src={ `/images/home-filter/${ section }.png` }
+				<Image priority className='object-contain' width={ 500 } height={ 166 } src={ `/images/home-filter/${ section }.png` }
 							 alt=''/>
 			</div>
 		</div>

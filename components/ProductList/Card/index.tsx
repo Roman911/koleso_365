@@ -1,13 +1,13 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import Image from 'next/image';
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@heroui/button';
 import { Card, CardBody, CardFooter } from '@heroui/card';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { useAppDispatch } from '@/hooks/redux';
 import { addCart } from '@/store/slices/cartSlice';
+import { setProgress } from '@/store/slices/progressSlice';
 import type { Product } from '@/models/products';
 import { Language } from '@/models/language';
 import { addToStorage, getFromStorage } from '@/lib/localeStorage';
@@ -23,6 +23,7 @@ interface Props {
 }
 
 const ProductCard: FC<Props> = ({ item }) => {
+	const [ isLoading, setLoading ] = useState(false);
 	const locale = useLocale();
 	const router = useRouter();
 	const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const ProductCard: FC<Props> = ({ item }) => {
 	const sectionNew = section === Section.Tires ? cargo.includes(item.vehicle_type) ? 'cargo' : 'tires' : section;
 
 	const handleClick = () => {
+		setLoading(true);
 		if(!cartStorage?.find((item: { id: number, quantity: number }) => item.id === best_offer.id)) {
 			const cart = [ ...cartStorage, {
 				id: best_offer.id,
@@ -42,25 +44,34 @@ const ProductCard: FC<Props> = ({ item }) => {
 			dispatch(addCart({ id: best_offer.id, quantity: 1, section }));
 			addToStorage('reducerCart', cart);
 		}
-		router.push(`/${ locale }/cart`)
+		router.push(`/cart`)
 	};
+
+	const onClick = () => {
+		dispatch(setProgress(true));
+	}
 
 	return (
 		<Card radius='none' className='relative py-2 px-4'>
 			<CardBody>
 				<div className='relative min-h-72 sm:min-h-52 text-center'>
-					<IconsBlock season={ season } vehicle_type={ vehicle_type } />
-					<ActionsBlock sectionNew={ sectionNew } group={ group } />
+					<IconsBlock season={ season } vehicle_type={ vehicle_type }/>
+					<ActionsBlock sectionNew={ sectionNew } group={ group }/>
 					<Image
 						className='mx-auto'
-						src={ default_photo || `/images/no-photo${locale === Language.UK ? '' : '-ru'}.jpg` }
+						src={ default_photo || `/images/no-photo${ locale === Language.UK ? '' : '-ru' }.jpg` }
 						alt={ full_name }
 						width={ 220 }
 						height={ 220 }
 					/>
 				</div>
-				<Link href={ `/${ page_url }` }
-							className='font-bold my-2.5 min-h-12 after:absolute after:inset-0'>{ full_name }</Link>
+				<Link
+					href={ `/${ page_url }` }
+					onClick={ onClick }
+					className='font-bold my-2.5 min-h-12 after:absolute after:inset-0'
+				>
+					{ full_name }
+				</Link>
 				<div className='text-sm text-gray-500 my-2.5'>
 					<span>Артикул: </span><span>{ sku }</span>
 				</div>
@@ -73,7 +84,7 @@ const ProductCard: FC<Props> = ({ item }) => {
 							<div className='text-2xl font-bold'>{ min_price } ₴</div>
 						</div>
 					</div>
-					<Button className='uppercase font-bold w-36' onPress={ handleClick } color='primary' radius='full'>
+					<Button isLoading={ isLoading } className='uppercase font-bold w-36' onPress={ handleClick } color='primary' radius='full'>
 						{ t('buy') }
 					</Button>
 				</div>

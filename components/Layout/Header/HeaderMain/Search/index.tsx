@@ -1,14 +1,13 @@
 'use client'
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
-
-import { useRouter } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { twMerge } from 'tailwind-merge';
-import { Link } from '@/i18n/routing';
+import { useAppDispatch } from '@/hooks/redux';
+import { setProgress } from '@/store/slices/progressSlice';
+import { Link, useRouter } from '@/i18n/routing';
 import { Button } from '@heroui/button';
 import { Input } from '@heroui/input';
 import { baseDataAPI } from '@/services/baseDataService';
-import { useAppDispatch } from '@/hooks/redux';
 import { setSearch } from '@/store/slices/searchSlice';
 import Spinner from '@/components/UI/Spinner';
 import CloseButton from '@/components/UI/CloseButton';
@@ -18,15 +17,16 @@ import { useClickOutside } from '@/hooks/clickOutside';
 
 const Search = () => {
 	const router = useRouter();
-	const locale = useLocale();
 	const t = useTranslations('Catalog');
 	const [ value, setValue ] = useState('');
 	const { data } = baseDataAPI.useFetchProductsQuery({ id: `?name=${ value }` })
 	const dispatch = useAppDispatch();
 	const dropdownRef = useRef<HTMLDivElement>(null);
+
 	const handleClick = () => {
 		setValue('');
 	}
+
 	useClickOutside({ ref: dropdownRef, open: value.length < 2, onClose: handleClick });
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,14 +34,16 @@ const Search = () => {
 	}
 
 	const handleClickAllProduct = () => {
+		dispatch(setProgress(true));
 		dispatch(setSearch(value));
 		handleClick();
 	}
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		dispatch(setProgress(true));
 		handleClickAllProduct();
-		router.push(`/${ locale }/search`);
+		router.push(`/search`);
 	}
 
 	return (
