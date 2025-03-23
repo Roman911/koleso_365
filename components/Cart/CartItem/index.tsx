@@ -51,18 +51,18 @@ const CartItem: FC<CartItemProps> = (
 		setQuantity(id,numericValue < offerQuantity ? numericValue : offerQuantity);
 	}
 
-	return <div className='flex flex-col md:flex-row py-4 items-center relative border-b'>
+	return <div className='flex flex-col lg:flex-row py-4 items-center relative border-b'>
 		<Link href={`/${pageUrl}`}>
 			<Image src={ default_photo } height={ 122 } width={ 122 } alt={ full_name } />
 		</Link>
-		<div className='flex flex-col md:flex-row justify-between items-center w-full ml-4 pr-4 mt-4 md:mt-0 md:pr-0'>
+		<div className='flex flex-col lg:flex-row justify-between items-center w-full ml-4 pr-4 mt-4 lg:mt-0 lg:pr-0'>
 			<div className='flex-1'>
-				<Link href={ `/${pageUrl}` } className='font-bold md:text-medium hover:text-primary transition'>
+				<Link href={ `/${pageUrl}` } className='font-bold lg:text-medium hover:text-primary transition'>
 					{ full_name }
 				</Link>
 				<div className='font-bold text-lg mt-2'>{ price } ₴/шт.</div>
 				<div className='text-sm text-gray-500 mt-1'>Арт: { sku }</div>
-				<div className='country mt-2 md:col-span-4'>
+				<div className='country mt-2 lg:col-span-4'>
 					{ (country || year) && <CountryInfo
 						country={ country }
 						countryCode={ countryCodeTransform( locale === Language.UK ? country : country_ru) }
@@ -70,7 +70,7 @@ const CartItem: FC<CartItemProps> = (
 					/> }
 				</div>
 			</div>
-			<div className='flex flex-col items-end mt-6 md:mt-3 mr-4 gap-4'>
+			<div className='flex flex-col items-end mt-6 lg:mt-3 mr-4 gap-4'>
 				<Quantity
 					id={ id }
 					price={ price }
@@ -85,7 +85,7 @@ const CartItem: FC<CartItemProps> = (
 			isIconOnly
 			variant='light'
 			onPress={() => removeProduct(id)}
-			className='absolute top-4 right-0 md:right-3 p-2'
+			className='absolute top-4 right-0 lg:right-3 p-2'
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className='w-4 h-4 fill-gray-500'>
 				<path

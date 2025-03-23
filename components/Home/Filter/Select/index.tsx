@@ -34,7 +34,7 @@ const MySelect: FC<SelectProps> = ({ name, label, options = [], isDisabled = fal
 
 	return <Autocomplete
 		color={ color || 'primary' }
-		className={ twMerge('max-w-full md:max-w-xs', hidden ) }
+		className={ twMerge('max-w-full lg:max-w-xs', hidden ) }
 		classNames={{
 			popoverContent: 'rounded-none',
 			selectorButton: 'text-black',

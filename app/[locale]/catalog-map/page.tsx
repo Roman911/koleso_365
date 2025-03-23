@@ -31,7 +31,7 @@ export default function CatalogMap() {
 	return (
 		<LayoutWrapper className='max-w-[1260px]'>
 			<Breadcrumbs path={ path } />
-			<div className='mt-2.5 grid grid-cols-1 md:grid-cols-2 gap-5'>
+			<div className='mt-2.5 grid grid-cols-1 lg:grid-cols-2 gap-5'>
 				{ links.map((item, index) => (
 					<Link key={ index } href={ `/${item.href}` } className='relative rounded-2xl group transition duration-300 overflow-hidden'>
 						<Image

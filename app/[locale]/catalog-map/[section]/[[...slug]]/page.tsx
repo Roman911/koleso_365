@@ -52,7 +52,7 @@ export default async function Brands({ params }: { params: Promise<{ locale: Lan
 		<LayoutWrapper>
 			<Breadcrumbs path={ path } />
 			<Title title={ title } translations={ true } />
-			<div className='columns-2 md:columns-4'>
+			<div className='columns-2 lg:columns-4'>
 				{ slug ?
 					<ProductList section={ section } data={ brands } /> :
 					<BrandsList brands={ brands } section={ section } />

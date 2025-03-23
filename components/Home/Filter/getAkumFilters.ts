@@ -42,7 +42,7 @@ export const getAkumFilters = ({ data }: Props) => {
 		name: 'dovzina',
 		focusValue: '',
 		options: data?.dovzina.map(item => ({ value: item.value, label: item.value, p: item.p })),
-		hidden: 'hidden md:inline-flex'
+		hidden: 'hidden lg:inline-flex'
 	});
 
 	filterConfigs.push({
@@ -50,7 +50,7 @@ export const getAkumFilters = ({ data }: Props) => {
 		name: 'sirina',
 		focusValue: '',
 		options: data?.sirina.map(item => ({ value: item.value, label: item.value, p: item.p })),
-		hidden: 'hidden md:inline-flex'
+		hidden: 'hidden lg:inline-flex'
 	});
 
 	filterConfigs.push({
@@ -58,7 +58,7 @@ export const getAkumFilters = ({ data }: Props) => {
 		name: 'visota',
 		focusValue: '',
 		options: data?.visota.map(item => ({ value: item.value, label: item.value, p: item.p })),
-		hidden: 'hidden md:inline-flex'
+		hidden: 'hidden lg:inline-flex'
 	});
 
 	filterConfigs.push({
@@ -66,7 +66,7 @@ export const getAkumFilters = ({ data }: Props) => {
 		name: 'brand',
 		focusValue: '',
 		options: data?.brand_akum?.map(item => ({ value: item.value, label: item.label })),
-		hidden: 'md:hidden'
+		hidden: 'lg:hidden'
 	});
 
 	return filterConfigs;

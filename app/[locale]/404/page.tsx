@@ -9,10 +9,10 @@ export default function NotFound() {
 
 	return (
 		<div className='min-h-96 bg-white py-10 px-6'>
-			<div className='max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4'>
+			<div className='max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4'>
 				<div className='mt-16 col-span-2 ml-auto'>
 					<h2
-						className='text-5xl mb-10 text-center md:text-start'>404 {locale === Language.UK ? 'Сторінку не знайдено' : 'Страница не найдена'}</h2>
+						className='text-5xl mb-10 text-center lg:text-start'>404 {locale === Language.UK ? 'Сторінку не знайдено' : 'Страница не найдена'}</h2>
 					<p className='text-lg'>
 						{
 							locale === Language.UK ?

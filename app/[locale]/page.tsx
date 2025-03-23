@@ -64,13 +64,13 @@ export default async function Home({ params }: { params: Promise<{ locale: Langu
 		<main>
 			<LayoutWrapper>
 				<Filter />
-				<Title title={ response[lang].h2_top } className='mt-12 mb-5 text-3xl md:text-4xl font-bold px-3 md:px-0' />
+				<Title title={ response[lang].h2_top } className='mt-12 mb-5 text-3xl lg:text-4xl font-bold px-3 lg:px-0' />
 				{ products.result ? <ProductList
-					classnames='grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+					classnames='grid-cols-1 lg:grid-cols-2 lg:grid-cols-4'
 					data={ products.data }
 				/> : <NoResult noResultText='no result'/> }
 				{ productsAkum.result ? <ProductList
-					classnames='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-4'
+					classnames='grid-cols-1 lg:grid-cols-2 lg:grid-cols-4 mt-4'
 					data={ productsAkum.data }
 				/> : <NoResult noResultText='no result'/> }
 				<TextSeo description={ response[lang].description }/>

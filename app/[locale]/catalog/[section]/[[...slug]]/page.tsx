@@ -76,7 +76,7 @@ export default async function Catalog({ params }: { params: Promise<{ locale: La
 					<SelectionByCar />
 					<FilterActive locale={ locale } className='hidden lg:flex' slug={ slug } />
 					{ products.result ? <ProductList
-						classnames='grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+						classnames='grid-cols-1 lg:grid-cols-2 lg:grid-cols-3'
 						data={ products.data }
 					/> : <NoResult noResultText='no result' /> }
 					{ products.result && products.data.total_count > pageItem && <div className='mt-10 flex justify-center'>

@@ -101,7 +101,7 @@ const OrderComponent: FC<OrderProps> = (
 					<MySelect name='payment_method' label='Способ оплаты' options={ paymentsOptions } onChange={ onChange }/>
 				</div>
 			</div>
-			<div className='bg-white pt-5 pb-8 px-6 mt-4 md:mb-20'>
+			<div className='bg-white pt-5 pb-8 px-6 mt-4 lg:mb-20'>
 				<h4 className='font-semibold'>
 					{ t('add comment') }
 				</h4>

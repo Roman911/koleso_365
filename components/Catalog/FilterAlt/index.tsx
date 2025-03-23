@@ -42,10 +42,10 @@ const FilterAlt: FC<Props> = ({ filterData, section }) => {
 	return (
 		<div>
 			<FilterBtn openFilter={ onOpen } title={ t('filters') }/>
-			<div className='hidden md:block'>
+			<div className='hidden lg:block'>
 				<SwitchTabs section={ section }/>
 				<div
-					className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-200 z-10 overflow-y-auto md:overflow-y-visible'>
+					className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-200 z-10 overflow-y-auto lg:overflow-y-visible'>
 					<SubmitFloat element={ element } btnTitle={ t('to apply') } setElement={ setElement } offset={ Section.Battery ? 354 : 360 }/>
 					{ section !== Section.Battery && <SwitchTabsByParams subsection={ subsection }/> }
 					{ subsection === 'byCars' && <ByCar data={ data }/> }
@@ -65,7 +65,7 @@ const FilterAlt: FC<Props> = ({ filterData, section }) => {
 								<SwitchTabs section={ section }/>
 							</div>
 							<div
-								className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-200 z-10 overflow-y-auto md:overflow-y-visible'>
+								className='relative pb-32 lg:pb-4 px-4 pt-4 bg-white border border-gray-200 z-10 overflow-y-auto lg:overflow-y-visible'>
 								<SwitchTabsByParams subsection={ subsection }/>
 								{ subsection === 'byCars' && <ByCar data={ data }/> }
 								{ section === Section.Tires && <SectionTires onChange={ onChange } filterData={ filterData } /> }

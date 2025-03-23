@@ -47,7 +47,7 @@ const Search = () => {
 	}
 
 	return (
-		<div className={ twMerge('relative w-full mx-auto md:mt-4 md:pr-6 lg:mt-0 lg:max-w-[500px]', styles.search) }>
+		<div className={ twMerge('relative w-full mx-auto lg:mt-4 lg:pr-6 lg:mt-0 lg:max-w-[500px]', styles.search) }>
 			<form className='w-full' onSubmit={ onSubmit }>
 				<Input
 					onChange={ onChange }
@@ -68,7 +68,7 @@ const Search = () => {
 				/>
 			</form>
 			<div ref={ dropdownRef } className={ twMerge(
-				'absolute top-12 right-0 z-20 py-6 px-6 md:px-10 bg-gray-800 text-white rounded-sm w-full lg:max-w-[460px]',
+				'absolute top-12 right-0 z-20 py-6 px-6 lg:px-10 bg-gray-800 text-white rounded-sm w-full lg:max-w-[460px]',
 				value.length < 2 && 'hidden'
 			) }>
 				<CloseButton handleClick={ handleClick }/>

@@ -45,7 +45,7 @@ const HeaderMain: FC<Props> = ({ settings }) => {
 				isMenuOpen={ isMenuOpen }
 				onMenuOpenChange={ setIsMenuOpen }
 				className='container mx-auto bg-white relative'
-				classNames={ { wrapper: twMerge('grid h-30 md:h-18 items-center justify-normal py-1 px-4 grid-cols-2 gap-2 md:gap-4 lg:grid-cols-[260px_auto_auto_150px]', styles['container']) } }
+				classNames={ { wrapper: twMerge('grid h-30 lg:h-18 items-center justify-normal py-1 px-4 grid-cols-2 gap-2 lg:gap-4 lg:grid-cols-[260px_auto_auto_150px]', styles['container']) } }
 			>
 				<NavbarContent className={ styles.logo }>
 					<NavbarBrand>
@@ -58,7 +58,7 @@ const HeaderMain: FC<Props> = ({ settings }) => {
 				<NavbarContent className={ styles.search }>
 					<Search />
 				</NavbarContent>
-				<NavbarContent justify='end' className='px-2 md:px-4 gap-3 md:gap-4'>
+				<NavbarContent justify='end' className='px-2 lg:px-4 gap-3 lg:gap-4'>
 					<Contacts settings={ settings } />
 					<ButtonBlock />
 					<NavbarMenuToggle className="sm:hidden" aria-label={ isMenuOpen ? "Close menu" : "Open menu" }/>

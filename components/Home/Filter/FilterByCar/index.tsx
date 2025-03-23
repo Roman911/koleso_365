@@ -75,7 +75,7 @@ const FilterByCar: FC<Props> = ({ section, color }) => {
 
 	return (
 		<>
-			<div className='grid grid-cols-1 md:grid-cols-2 gap-2.5 md:mt-7'>
+			<div className='grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:mt-7'>
 				{ filters.map(item => {
 					return <MySelect
 						key={ item.name }
@@ -89,7 +89,7 @@ const FilterByCar: FC<Props> = ({ section, color }) => {
 					/>
 				}) }
 			</div>
-			<div className='mt-4 md:mt-10'>
+			<div className='mt-4 lg:mt-10'>
 				<Button isLoading={ isLoading } size='lg' radius='full' onPress={ onSubmit }
 								className='uppercase w-full font-bold bg-white'>
 					{ t('choose') }

@@ -82,10 +82,10 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 	}
 
 	return (
-		<section className='product-page flex flex-col lg:flex-row justify-between gap-1 xl:gap-x-6 mt-4 md:mt-6'>
-			<div className='flex-1 md:pr-3 xl:pr-5'>
+		<section className='product-page flex flex-col lg:flex-row justify-between gap-1 xl:gap-x-6 mt-4 lg:mt-6'>
+			<div className='flex-1 lg:pr-3 xl:pr-5'>
 				{ data.result &&
-					<div className='flex flex-col md:flex-row items-center md:items-start md:border-b border-gray-200'>
+					<div className='flex flex-col lg:flex-row items-center lg:items-start lg:border-b border-gray-200'>
 						<ImagesBlock
 							labels={ labels }
 							locale={ locale }
@@ -95,12 +95,12 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 							vehicle_type={ data.data.offer_group.vehicle_type }
 							season={ model.season }
 						/>
-						<ActionsBlock className='flex md:hidden' id={ id } section={ section } quantity={ quantity }
+						<ActionsBlock className='flex lg:hidden' id={ id } section={ section } quantity={ quantity }
 													productName={ full_name }/>
-						<div className='flex-1 md:ml-6 xl:ml-10'>
-							<h1 className='text-2xl font-bold mt-8 md:mt-0'>{ full_name }</h1>
+						<div className='flex-1 lg:ml-6 xl:ml-10'>
+							<h1 className='text-2xl font-bold mt-8 lg:mt-0'>{ full_name }</h1>
 							<div className='flex mt-4 items-center'>
-								<div className='text-[15px] text-gray-500 bg-gray-300 rounded-full py-1 md:py-1 px-3 mr-5'>
+								<div className='text-[15px] text-gray-500 bg-gray-300 rounded-full py-1 lg:py-1 px-3 mr-5'>
 									Артикул: { offer_group.sku }
 								</div>
 								<Rating
@@ -108,7 +108,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 									commentsAvgRate={ averageScore || 0 }
 								/>
 							</div>
-							<div className='flex justify-between mt-4 md:mt-6'>
+							<div className='flex justify-between mt-4 lg:mt-6'>
 								<div>
 									<div className='flex items-end'>
 										<div className='mr-2.5 text-xl font-medium lowercase'>{ t('price') }</div>
@@ -119,7 +119,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 										* { t(section === Section.Disks ? 'price one disk' : 'price one tire') }
 									</div> }
 								</div>
-								<ActionsBlock className='hidden md:flex' id={ id } section={ section } quantity={ quantity }
+								<ActionsBlock className='hidden lg:flex' id={ id } section={ section } quantity={ quantity }
 															productName={ full_name }/>
 							</div>
 							<Offers locale={ locale } offerId={ offerId } offers={ offers } setOfferId={ setOfferId }
@@ -127,7 +127,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 						</div>
 					</div> }
 				<div
-					className='purchase-information flex md:items-center justify-between flex-col md:flex-row gap-4 mt-5 md:mt-10'>
+					className='purchase-information flex lg:items-center justify-between flex-col lg:flex-row gap-4 mt-5 lg:mt-10'>
 					<div>
 						<Quantity id={ 0 } quantity={ quantity } offerQuantity={ (Number(offer?.quantity) || 0) }
 											price={ offer?.price } onChange={ onChange } setQuantity={ onSetQuantity }/>

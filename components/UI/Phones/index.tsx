@@ -31,7 +31,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 			{ filterTelephones.map((item, index) => {
 				return <div
 					key={ index }
-					className={ twMerge('flex items-center my-0.5 text-sm', !isInfo && 'mr-1.5 md:mr-5') }
+					className={ twMerge('flex items-center my-0.5 text-sm', !isInfo && 'mr-1.5 lg:mr-5') }
 				>
 					{ item.logo && <Image
 						src={ `/icons/${item.logo}-logo.svg` }
@@ -40,7 +40,7 @@ const Phones: FC<Props> = ({ isInfo, settings, className = '' }) => {
 						height={ 20 }
 						priority
 					/> }
-					<a href={ `tel:${ item.url }` } className='ml-1 md:ml-2.5'>
+					<a href={ `tel:${ item.url }` } className='ml-1 lg:ml-2.5'>
 						{ item.phone }
 					</a>
 					{ item.logo === 'life' && <Icons.ViberIcon className='ml-2 h-5 w-5 fill-[#775bbc]' /> }

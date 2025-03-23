@@ -57,8 +57,8 @@ const CharacteristicsBlock: FC<CharacteristicsBlockProps> = ({ locale, data }) =
 		return <div dangerouslySetInnerHTML={ { __html: sanitizedHtml } }/>;
 	};
 
-	return <section className='mt-8 md:mt-16'>
-		<div className='gap-x-2.5 border-b border-[#E0E4E8] hidden md:flex'>
+	return <section className='mt-8 lg:mt-16'>
+		<div className='gap-x-2.5 border-b border-[#E0E4E8] hidden lg:flex'>
 			{ tabs.map((item, index) => {
 				return <button
 					key={ index }
@@ -71,7 +71,7 @@ const CharacteristicsBlock: FC<CharacteristicsBlockProps> = ({ locale, data }) =
 				</button>
 			}) }
 		</div>
-		<div className='relative text-left md:hidden'>
+		<div className='relative text-left lg:hidden'>
 			<button type='button' onClick={ () => setShowOptions(prev => !prev) }
 							className='flex items-center w-full justify-between px-3.5 py-2 bg-white border border-[#CDD0D9] rounded-sm font-medium'
 							id='menu-button'>
@@ -100,9 +100,9 @@ const CharacteristicsBlock: FC<CharacteristicsBlockProps> = ({ locale, data }) =
 				</div>
 			</div>
 		</div>
-		{ tab === 'main characteristics' && <div className='flex flex-col md:flex-row my-6 md:my-4 md:gap-10'>
+		{ tab === 'main characteristics' && <div className='flex flex-col lg:flex-row my-6 lg:my-4 lg:gap-10'>
 			<div className='flex-1'>
-				{ data?.data.offer_group.width && <div className='flex md:my-4 text-sm font-medium'>
+				{ data?.data.offer_group.width && <div className='flex lg:my-4 text-sm font-medium'>
 					<div
 						className='w-full flex items-center text-[#575C66] after:flex-1 after:min-w-6 after:border-b after:border-dashed after:border-[#AEB6C2] after:h-px after:mt-3 after:mx-2'>
 						<Tooltip content={ locale === Language.UK ? `Ширина ${ section === 'tires' ? 'шини в міліметрах' : 'диска в дюймах' }` :
@@ -187,7 +187,7 @@ const CharacteristicsBlock: FC<CharacteristicsBlockProps> = ({ locale, data }) =
 				</div> }
 			</div>
 			<div className='flex-1'>
-				{ <div className='flex md:my-4 text-sm font-medium'>
+				{ <div className='flex lg:my-4 text-sm font-medium'>
 					<div
 						className='w-full flex items-center text-[#575C66] after:flex-1 after:min-w-6 after:border-b after:border-dashed after:border-[#AEB6C2] after:h-px after:mt-3 after:mx-2'>
 						{ t('brand') }
@@ -261,7 +261,7 @@ const CharacteristicsBlock: FC<CharacteristicsBlockProps> = ({ locale, data }) =
 				</div> }
 			</div>
 		</div> }
-		{ tab === 'description' && <div className='my-5 md:my-6 leading-7'>
+		{ tab === 'description' && <div className='my-5 lg:my-6 leading-7'>
 			{ description && <HtmlContent htmlString={ description }/> }
 		</div> }
 		{ tab === 'reviews' && <Comments

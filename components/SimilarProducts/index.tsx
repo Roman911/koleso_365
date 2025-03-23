@@ -40,7 +40,7 @@ const SimilarProducts: FC<Props> = ({ offerGroup }) => {
 		<Title title='similar products' translations={ true } />
 		<Spinner height='h-40' show={ isLoading } >
 			{ data?.result && <ProductList
-				classnames='grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-3 md:px-0'
+				classnames='grid-cols-1 lg:grid-cols-2 lg:grid-cols-4 px-3 lg:px-0'
 				data={ data?.data }
 			/> }
 		</Spinner>

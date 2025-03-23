@@ -42,8 +42,8 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 
 	return (
 		<div
-			className={ twMerge('flex-1 flex flex-col justify-between md:pt-10 md:px-6 pb-4 md:pb-0 md:bg-blue-300 rounded-3xl', className, section === Section.Battery && 'md:bg-blue-500') }>
-			<div className='hidden md:flex justify-between h-12'>
+			className={ twMerge('flex-1 flex flex-col justify-between lg:pt-10 lg:px-6 pb-4 lg:pb-0 lg:bg-blue-300 rounded-3xl', className, section === Section.Battery && 'lg:bg-blue-500') }>
+			<div className='hidden lg:flex justify-between h-12'>
 				{ section === Section.Battery ?
 					<div className='text-2xl uppercase font-bold text-white'>{ t('battery') }</div> :
 					<div>
@@ -52,7 +52,7 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 							radius='full'
 							onPress={ () => handleClick(Section.Tires) }
 							variant={ section === Section.Tires ? 'solid' : 'bordered' }
-							className={ twMerge('mr-2 text-2xl uppercase font-bold text-white', section === Section.Tires ? 'bg-white text-black' : 'opacity-50') }
+							className={ twMerge('mr-1 xl:mr-2 text-lg xl:text-2xl uppercase font-bold text-white px-4 xl:px-6', section === Section.Tires ? 'bg-white text-black' : 'opacity-50') }
 						>
 							{ t('tires') }
 						</Button>
@@ -61,7 +61,7 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 							radius='full'
 							onPress={ () => handleClick(Section.Disks) }
 							variant={ section === Section.Disks ? 'solid' : 'bordered' }
-							className={ twMerge('text-2xl uppercase font-bold text-white', section === Section.Disks ? 'bg-white text-black' : 'opacity-50') }
+							className={ twMerge('mr-1 xl:mr-2 text-lg xl:text-2xl uppercase font-bold text-white px-4 xl:px-6', section === Section.Disks ? 'bg-white text-black' : 'opacity-50') }
 						>
 							{ t('disks') }
 						</Button>
@@ -85,7 +85,7 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 				</div>
 			</div>
 			{ children }
-			{ (subsection === Subsection.ByParams || section === Section.Battery) && <div className='mt-4 md:mt-10'>
+			{ (subsection === Subsection.ByParams || section === Section.Battery) && <div className='mt-4 lg:mt-10'>
 				<Button
 					isLoading={ isLoading }
 					size='lg'
@@ -96,7 +96,7 @@ const FilterBlock: FC<Props> = ({ children, section, onSubmit, subsection, class
 					{ t('choose') }
 				</Button>
 			</div> }
-			<div className='mt-auto h-52 hidden md:flex justify-center items-end'>
+			<div className='mt-auto h-52 hidden lg:flex justify-center items-end'>
 				<Image priority className='object-contain' width={ 500 } height={ 166 } src={ `/images/home-filter/${ section }.png` }
 							 alt=''/>
 			</div>

@@ -55,7 +55,7 @@ const CarTireFilter: FC<Props> = ({ closeFilter }) => {
 		</div>
 		<div className='mt-6 lg:mt-0'>
 			<Title title={ t('by diameter') }/>
-			<div className='mt-6 mb-6 grid grid-cols-3 md:grid-cols-4 gap-1.5 max-w-64 pr-2.5'>
+			<div className='mt-6 mb-6 grid grid-cols-3 lg:grid-cols-4 gap-1.5 max-w-64 pr-2.5'>
 				{ diameterLinks.map(item => {
 					return <LinkComponent
 						key={ item.label }

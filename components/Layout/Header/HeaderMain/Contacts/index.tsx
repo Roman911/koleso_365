@@ -21,7 +21,7 @@ const Contacts: FC<Props> = ({ settings }) => {
 
 	return (
 		<Dropdown>
-			<DropdownTrigger className='md:hidden'>
+			<DropdownTrigger className='lg:hidden'>
 				<Button variant='light' className='p-0 min-w-12 gap-1'>
 					<div className='pt-2 pb-1 pl-2 pr-1 bg-primary rounded-full'>
 						<Icons.PhoneIcon className='h-6 w-6 fill-white' />

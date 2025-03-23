@@ -46,7 +46,7 @@ const DeliveryCalculation: FC<Props> = ({ offer_id, quantity, price, setQuantity
 		<>
 			<Button
 				onPress={ onOpen }
-				className='delivery-calculation bg-white mt-6 text-sm font-medium border rounded-full border-black w-full md:w-72 hover:bg-white hover:shadow'
+				className='delivery-calculation bg-white mt-6 text-sm font-medium border rounded-full border-black w-full lg:w-72 hover:bg-white hover:shadow'
 			>
 				<Image width={ 48 } height={ 32 } className='mr-2.5' src='/icons/truck.svg' alt=""/>
 				{ t('delivery calculation') }

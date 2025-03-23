@@ -36,7 +36,7 @@ const MySelect: FC<SelectProps> = (
 
 	return <Autocomplete
 		onInputChange={handleInputChange}
-		className='max-w-full md:max-w-full'
+		className='max-w-full lg:max-w-full'
 		classNames={ {
 			listboxWrapper: 'rounded-xs'
 		} }

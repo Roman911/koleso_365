@@ -10,7 +10,7 @@ export const DlWarehousesSearch = () => {
 	const { city } = useAppSelector(state => state.orderReducer);
 	const dispatch = useAppDispatch();
 	const dlCity = baseDataAPI.useFetchDlSearchQuery(city.label)
-	const { data } = baseDataAPI.useFetchDlWarehousesQuery(dlCity ? dlCity?.data?.[0].id : '');
+	const { data } = baseDataAPI.useFetchDlWarehousesQuery((dlCity && dlCity.data?.length) ? dlCity?.data?.[0].id : '');
 
 	const warehousesOptions = data?.map((item: { id: string, address: string }) => {
 		return { value: item.id, label: item.address }

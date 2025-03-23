@@ -97,7 +97,7 @@ const HeaderCatalog: FC<Props> = ({ section, slug }) => {
 	return (
 		<>
 			<Breadcrumbs path={ path } />
-			<Title isMain={ true } title={ title } translations={ false } className='mt-3 text-lg font-medium px-0 md:px-3 mb-3 md:mb-1' />
+			<Title isMain={ true } title={ title } translations={ false } className='mt-3 text-lg font-medium px-0 lg:px-3 mb-3 lg:mb-1' />
 		</>
 	)
 };

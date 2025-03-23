@@ -44,40 +44,40 @@ const Filter = () => {
 	}
 
 	return (
-		<section className='home-filter md:flex md:gap-4 w-full bg-blue-500 md:bg-transparent rounded-3xl py-6 px-2 md:p-0'>
-			<FilterBlock onSubmit={ submit } section={ section } subsection={ subsection } className='hidden md:flex'>
+		<section className='home-filter lg:flex lg:gap-4 w-full bg-blue-500 lg:bg-transparent rounded-3xl py-6 px-2 lg:p-0'>
+			<FilterBlock onSubmit={ submit } section={ section } subsection={ subsection } className='hidden lg:flex'>
 				{ subsection === Subsection.ByParams ?
 					<TiresFilter filters={ getFilters({ locale, section, data }) } onChange={ onChange } section={ section } /> :
 					<FilterByCar section={ section } /> }
 			</FilterBlock>
-			<FilterBlock onSubmit={ submit } section={ Section.Battery } className='hidden md:flex'>
+			<FilterBlock onSubmit={ submit } section={ Section.Battery } className='hidden lg:flex'>
 				<TiresFilter filters={ getAkumFilters({ data: dataAkum }) } onChange={ onChange } section={ Section.Battery }/>
 			</FilterBlock>
-			<h3 className='md:hidden text-white text-center text-2xl font-bold mb-4'>
+			<h3 className='lg:hidden text-white text-center text-2xl font-bold mb-4'>
 				{ t('selection of tires wheels and batteries') }
 			</h3>
-			<Accordion variant='splitted' className='md:hidden' itemClasses={{ title: 'text-white text-center uppercase font-bold' }}>
+			<Accordion variant='splitted' className='lg:hidden' itemClasses={{ title: 'text-white text-center uppercase font-bold' }}>
 				<AccordionItem key='1' aria-label={ t('tires by parameters') } title={ t('tires by parameters') } className='bg-blue-800 rounded-3xl'
 											 startContent={ <Icons.TireIcon className='fill-white' /> }>
-					<FilterBlock onSubmit={ submit } section={ Section.Tires } subsection={ subsection } className='md:hidden'>
+					<FilterBlock onSubmit={ submit } section={ Section.Tires } subsection={ subsection } className='lg:hidden'>
 						<TiresFilter filters={ getFilters({ locale, section, data }) } onChange={ onChange } section={ section }/>
 					</FilterBlock>
 				</AccordionItem>
 				<AccordionItem key='2' aria-label={ t('disks by parameters') } title={ t('disks by parameters') } className='bg-blue-800 rounded-3xl'
 											 startContent={ <Icons.DiskIcon className='fill-white' /> }>
-					<FilterBlock onSubmit={ submit } section={ Section.Disks } subsection={ subsection } className='md:hidden'>
+					<FilterBlock onSubmit={ submit } section={ Section.Disks } subsection={ subsection } className='lg:hidden'>
 						<TiresFilter filters={ getFilters({ locale, section: Section.Disks, data }) } onChange={ onChange } section={ section }/>
 					</FilterBlock>
 				</AccordionItem>
 				<AccordionItem key='3' aria-label={ t('batteries by parameters') } title={ t('batteries by parameters') } className='bg-blue-800 rounded-3xl'
 											 startContent={ <Icons.Batteries className='fill-white' /> }>
-					<FilterBlock onSubmit={ submit } section={ Section.Battery } subsection={ subsection } className='md:hidden'>
+					<FilterBlock onSubmit={ submit } section={ Section.Battery } subsection={ subsection } className='lg:hidden'>
 						<TiresFilter filters={ getAkumFilters({ data: dataAkum }) } onChange={ onChange } section={ Section.Battery }/>
 					</FilterBlock>
 				</AccordionItem>
 				<AccordionItem key='4' aria-label={ t('selection tires by car') } title={ t('selection tires by car') } className='bg-blue-800 rounded-3xl'
 											 startContent={ <Icons.CarIcon className='fill-white' /> }>
-					<FilterBlock onSubmit={ submit } section={ Section.Tires } subsection={ subsection } className='md:hidden'>
+					<FilterBlock onSubmit={ submit } section={ Section.Tires } subsection={ subsection } className='lg:hidden'>
 						<FilterByCar section={ Section.Tires } />
 					</FilterBlock>
 				</AccordionItem>

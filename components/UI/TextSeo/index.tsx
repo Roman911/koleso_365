@@ -18,7 +18,7 @@ const TextSeo: FC<Props> = ({ description })=> {
 	};
 
 	return (
-		<div className='mt-20 mb-24 flex flex-col md:flex-row'>
+		<div className='mt-20 mb-24 flex flex-col lg:flex-row'>
 			<HtmlContent htmlString={ description } />
 			<Image src='/images/seo/banner.jpg' alt='' width={ 496 } height={ 401 } className='rounded-2xl' />
 		</div>

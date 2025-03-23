@@ -66,7 +66,7 @@ const BuyActions: FC<Props> = ({ locale, offerId, quantity, section, data, onSub
 				<Button color='success' size='lg' radius='full' onPress={ onOpen } className='uppercase font-bold'>
 					{ t('in cart') }
 				</Button> :
-				<Button onPress={ handleClickBuy } color='primary' radius='full' size='lg' className='uppercase w-full font-bold md:w-72'>
+				<Button onPress={ handleClickBuy } color='primary' radius='full' size='lg' className='uppercase w-full font-bold lg:w-72'>
 					{ t('buy') }
 				</Button>
 			}
@@ -94,7 +94,7 @@ const BuyActions: FC<Props> = ({ locale, offerId, quantity, section, data, onSub
 								</Spinner>
 							</ModalBody>
 							<ModalFooter>
-								<Button variant='bordered' size='lg' className='uppercase font-bold' radius='full' onPress={onClose}>
+								<Button variant='bordered' size='lg' className='uppercase font-bold hidden lg:block' radius='full' onPress={onClose}>
 									{ t('continue shopping') }
 								</Button>
 								<Button color='primary' size='lg' className='uppercase font-bold' radius='full' onPress={ handleClick }>

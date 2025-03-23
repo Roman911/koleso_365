@@ -25,7 +25,7 @@ const Comments: FC<CommentsProps> = ({ review, model_id, product_id, trc_id }) =
 		return `${ day }.${ month }.${ year } ${ hours }:${ minutes }`;
 	};
 
-	return <div className='my-5 md:my-6 max-w-xl w-full'>
+	return <div className='my-5 lg:my-6 max-w-xl w-full'>
 		{ review?.length ? review.map(item => (
 			<div key={ item.review_id } className='bg-white py-4 px-6 shadow-md'>
 				<div className='flex justify-between'>
