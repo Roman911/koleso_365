@@ -6,6 +6,9 @@ import Title from '@/components/UI/Title';
 import NoResult from '@/components/UI/NoResult';
 import ProductList from '@/components/ProductList';
 import TextSeo from '@/components/UI/TextSeo';
+import PopularSizes from '@/components/Home/PopularSizes';
+import PopularCarBrands from '@/components/Home/PopularCarBrands';
+import Reviews from '@/components/Home/Reviews';
 
 async function getSettings() {
 	const res = await fetch(`${ process.env.SERVER_URL }/baseData/settings`, {
@@ -41,6 +44,26 @@ async function getProductsAkum() {
 	return await res.json();
 }
 
+async function getFeatureParams() {
+	const res = await fetch(`${ process.env.SERVER_URL }/api/getFeatureParams`, {
+		method: 'GET',
+		headers: {
+			'Access-Control-Allow-Credentials': 'true',
+		}
+	});
+	return await res.json();
+}
+
+async function getReviews() {
+	const res = await fetch(`${ process.env.SERVER_URL }/api/reviews`, {
+		method: 'GET',
+		headers: {
+			'Access-Control-Allow-Credentials': 'true',
+		}
+	});
+	return await res.json();
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: Language }> }): Promise<Metadata> {
 	const { locale } = await params;
 	const lang = locale === Language.UK ? LanguageCode.UA : Language.RU;
@@ -59,6 +82,8 @@ export default async function Home({ params }: { params: Promise<{ locale: Langu
 	const response = await getSettings();
 	const products = await getProducts();
 	const productsAkum = await getProductsAkum();
+	const featureParams = await getFeatureParams();
+	const reviews = await getReviews();
 
 	return (
 		<main>
@@ -73,6 +98,9 @@ export default async function Home({ params }: { params: Promise<{ locale: Langu
 					classnames='grid-cols-1 lg:grid-cols-2 lg:grid-cols-4 mt-4'
 					data={ productsAkum.data }
 				/> : <NoResult noResultText='no result'/> }
+				{ featureParams.ProductTiporazmer && <PopularSizes locale={ locale } settings={ response } popularSizes={ featureParams.ProductTiporazmer } /> }
+				{ reviews && <Reviews reviews={ reviews } /> }
+				{ featureParams.Car2Brand && <PopularCarBrands locale={ locale } settings={ response } popularCarBrands={ featureParams.Car2Brand } /> }
 				<TextSeo description={ response[lang].description }/>
 			</LayoutWrapper>
 		</main>

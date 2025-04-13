@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseDataProps, CarModelProps, KitDiskSize, KitTyreSize, ManufModels } from '@/models/baseData';
 import type { SettingsProps } from '@/models/settings';
 import type { ProductsProps } from '@/models/products';
-// import type { ProductProps } from '../models/product';
+import type { ProductProps } from '@/models/product';
 import type { AkumProps } from '@/models/akumData';
 import type { OrdersParamProps } from '@/models/ordersParam';
 // import type { Banner } from '../models/banners';
@@ -92,12 +92,12 @@ export const baseDataAPI = createApi({
 				url: `/api/baseDataAkum`,
 			}),
 		}),
-		// fetchProduct: build.query<ProductProps, string>({
-		// 	query: ([section]) => ({
-		// 		url: `/api/getProduct/${[section]}`,
-		// 	}),
-		// 	providesTags: () => ['Product']
-		// }),
+		fetchProduct: build.query<ProductProps, string>({
+			query: ([section]) => ({
+				url: `/api/getProduct/${[section]}`,
+			}),
+			providesTags: () => ['Product']
+		}),
 		// fetchBrand: build.query({
 		// 	query: ([section]) => ({
 		// 		url: `/api/brand/${[section]}`,

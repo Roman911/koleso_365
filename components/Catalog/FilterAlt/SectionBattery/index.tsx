@@ -46,7 +46,7 @@ const SectionBattery: FC<Props> = ({ onChange }) => {
 			<Select
 				name='tip_korpusu'
 				label='body type'
-				options={ dataAkum?.['tip-korpusu'].map(item => ({value: item.value, label: item.value, p: item.p})) || []}
+				options={ dataAkum?.['tip-korpusu'].map(item => ({value: item.value, label: item.p, p: item.p})) || []}
 				variant='white'
 				onChange={ onChange }
 				filterValue={ filter?.tip_korpusu }
@@ -77,7 +77,7 @@ const SectionBattery: FC<Props> = ({ onChange }) => {
 			<Select
 				name='poliarnist'
 				label='polarity'
-				options={ dataAkum?.poliarnist.map(item => ({value: item.value, label: item.value, p: item.p})) || []}
+				options={ dataAkum?.poliarnist.map(item => ({value: item.value, label: item.p, p: item.p})) || []}
 				variant='white'
 				onChange={ onChange }
 				filterValue={ filter?.poliarnist }

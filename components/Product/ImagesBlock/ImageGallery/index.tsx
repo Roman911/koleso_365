@@ -4,6 +4,7 @@ import * as React from "react";
 import dynamic from "next/dynamic";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import { Photo } from '@/models/product';
+import './index.scss';
 
 const LightboxMy = dynamic(() => import("./LightboxComponent"), { ssr: false });
 const LightboxImage = dynamic(() => import("./LightboxImage"), { ssr: false });
