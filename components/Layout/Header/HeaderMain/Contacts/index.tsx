@@ -33,13 +33,12 @@ const Contacts: FC<Props> = ({ settings }) => {
 				{(item) => (
 					<DropdownItem
 						key={ item.phone }
+						href={`tel:${item.url}`}
 						endContent={ item.logo === 'life' && <Icons.ViberIcon className='ml-2 h-5 w-5 fill-[#775bbc]' /> }
 						startContent={ item.logo ? <Image width={ 24 } height={ 24 } src={`/icons/${item.logo}-logo.svg`} alt=''/> :
 							<Icons.PhoneIcon className='fill-primary' /> }
 					>
-						<a href={`tel:${item.url}`} className='ml-2.5 font-medium'>
-							{item.phone}
-						</a>
+						{item.phone}
 					</DropdownItem>
 				)}
 			</DropdownMenu>
