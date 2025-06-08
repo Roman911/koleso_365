@@ -1,0 +1,55 @@
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
+.slick-list {
+  padding: 30px 10px;
+}
+
+.slick-prev,
+.slick-next {
+  height: 50px;
+  width: 50px;
+  color:  #94979E;
+  border-radius: 50%;
+  border: 1px solid var(--color-gray-700);
+  background-color: #ffffff;
+
+  svg {
+    width: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    color: var(--color-gray-400);
+    background-color: var(--color-gray-100);
+  }
+
+  &:before {
+    content: none;
+  }
+}
+
+.slick-prev {
+  left: -60px;
+}
+
+.slick-next {
+  right: -60px;
+}
+
+.dark {
+  .slick-prev,
+  .slick-next {
+    color:  #94979E;
+    border: 1px solid #707070;
+    background-color: var(--color-gray-800);
+
+    &:hover {
+      color: var(--color-gray-400);
+      background-color: #272727;
+    }
+  }
+}

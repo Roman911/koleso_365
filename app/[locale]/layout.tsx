@@ -1,4 +1,5 @@
-import type { Metadata } from 'next';
+import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import localFont from 'next/font/local'
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -29,35 +30,6 @@ const gilroy = localFont({
 		},
 	],
 })
-
-export const metadata: Metadata = {
-	icons: [
-		{
-			rel: 'icon',
-			type: 'image/png',
-			url: '/favicon-48x48.png',
-			sizes: '48x48',
-		},
-		{
-			rel: 'icon',
-			type: 'image/svg+xml',
-			url: '/favicon.svg',
-		},
-		{
-			rel: 'shortcut icon',
-			url: '/favicon.ico',
-		},
-		{
-			rel: 'apple-touch-icon',
-			sizes: '180x180',
-			url: '/apple-touch-icon.png'
-		},
-		{
-			rel: 'manifest',
-			url: '/site.webmanifest',
-		}
-	]
-};
 
 async function getSettings() {
 	const res = await fetch(`${process.env.SERVER_URL}/baseData/settings`, {
@@ -96,6 +68,13 @@ export default async function RootLayout(
 		<html lang={ locale }>
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+			{ response[0].head_html && <Script
+				id="binotel-widget"
+				strategy="afterInteractive"
+				dangerouslySetInnerHTML={{
+					__html: response[0].head_html,
+				}}
+			/> }
 		</head>
 		<body className={ gilroy.className }>
 		<StoreProvider>
@@ -109,6 +88,7 @@ export default async function RootLayout(
 			<ToastProvider placement='top-right' />
 		</StoreProvider>
 		</body>
+		{ response?.[0].google_tag_manager && <GoogleAnalytics gaId={ response[0].google_tag_manager } /> }
 		</html>
 	);
 };

@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { twMerge } from 'tailwind-merge';
 import { Labels, Photo } from '@/models/product';
 import { Language } from '@/models/language';
-import InlinePlugin from '@/components/Product/ImagesBlock/ImageGallery';
 import { SeasonTransform, VehicleTypeTransform } from '@/lib/characteristicsTransform';
 import * as Icons from '../../UI/Icons';
+import { ReactSlick } from '@/components/Product/ImagesBlock/ReactSlick';
 
 const IconsObj = {
 	light: Icons.CarIcon,
@@ -60,8 +60,7 @@ const ImagesBlock: FC<Props> = ({ locale, labels, images, photo, full_name, vehi
 					width={ 288 }
 					height={ 288 }
 					alt={ full_name }
-				/> :
-				<InlinePlugin images={ images } photo={ photo }/> }
+				/> : <ReactSlick images={ images } photo={ photo } /> }
 		</div>
 	)
 }
