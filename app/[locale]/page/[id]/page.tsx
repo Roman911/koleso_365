@@ -3,24 +3,14 @@ import DOMPurify from 'isomorphic-dompurify';
 import LayoutWrapper from '@/components/Layout/LayoutWrapper';
 import Breadcrumbs from '@/components/UI/Breadcrumbs';
 import Title from '@/components/UI/Title';
-import type { Pages } from '@/models/alias';
 import { Language, LanguageCode } from '@/models/language';
-
-async function getAlias(id: string): Promise<Pages> {
-	const res = await fetch(`${process.env.SERVER_URL}/baseData/StatiAlias/${id}`, {
-		method: 'GET',
-		headers: {
-			'Access-Control-Allow-Credentials': 'true',
-		}
-	});
-	return await res.json();
-}
+import { getAlias } from '@/app/api/api';
+import { language } from '@/lib/language';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Language, id: string }> }): Promise<Metadata> {
 	const { locale, id } = await params;
-	const lang = locale === Language.UK ? LanguageCode.UA : Language.RU;
-	const alias = await fetch(`${process.env.SERVER_URL}/baseData/StatiAlias/${id}`)
-		.then((res) => res.json());
+	const lang = language(locale);
+	const alias = await getAlias(id);
 
 	return {
 		title: alias[id].description[lang].meta_title,
@@ -41,7 +31,6 @@ export default async function Pages({ params }: { params: Promise<{ locale: Lang
 	];
 
 	const HtmlContent = ({ htmlString }: { htmlString: string }) => {
-		console.log(htmlString);
 		const sanitizedHtml = DOMPurify.sanitize(htmlString, {
 			ADD_TAGS: ['iframe'],
 			ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'loading', 'referrerpolicy']
