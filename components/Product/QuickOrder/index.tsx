@@ -1,12 +1,11 @@
 'use client'
-import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useState } from 'react';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { SerializedError } from '@reduxjs/toolkit';
+import { addToast } from '@heroui/toast';
 import { Button } from '@heroui/button';
 import { Form } from '@heroui/form';
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@heroui/modal';
-import { Language } from '@/models/language';
 import { useTranslations } from 'next-intl';
 import { Section } from '@/models/filter';
 import { Offers } from '@/models/product';
@@ -15,7 +14,6 @@ import PhoneMaskInput from '@/components/UI/PhoneMaskInput';
 import { formatPhoneNumber } from '@/lib/formatPhoneNumber';
 
 interface Props {
-	locale: Language
 	offerId: number
 	quantity: number
 	section: Section
@@ -24,15 +22,13 @@ interface Props {
 
 const QuickOrder: FC<Props> = (
 	{
-		locale,
 		offerId,
 		quantity,
 		offerItem,
 	}
 ) => {
-	const router = useRouter();
 	const [ phoneErrorMessage, setPhoneErrorMessage ] = useState<string | null>(null);
-	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+	const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 	const [ createOrder, { isLoading } ] = baseDataAPI.useCreateOrderMutation();
 	const t = useTranslations('QuickOrder');
 
@@ -76,12 +72,16 @@ const QuickOrder: FC<Props> = (
 			}) => {
 				const data = response?.data;
 				if(data) {
+					addToast({
+						title: t('sent order'),
+						description: t('our manager'),
+						classNames: { base: 'text-black', title: 'text-black' },
+					});
 					if(data?.linkpay?.length > 0) {
 						window.open(data?.linkpay, "_blank")
 					}
 					if(data?.result) {
-						event.currentTarget.reset(); // Reset form fields
-						router.push(`/${ locale }/order/successful`)
+						onClose();
 					}
 				} else if(response.error) {
 					console.error('An error occurred:', response.error);
