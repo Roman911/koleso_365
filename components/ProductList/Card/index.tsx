@@ -54,7 +54,7 @@ const ProductCard: FC<Props> = ({ item }) => {
 	return (
 		<Card radius='none' className='relative py-2 px-4'>
 			<CardBody>
-				<div className='relative min-h-72 sm:min-h-52 text-center'>
+				<div className='relative md:min-h-72 sm:min-h-52 text-center'>
 					<IconsBlock season={ season } vehicle_type={ vehicle_type }/>
 					<ActionsBlock sectionNew={ sectionNew } group={ group }/>
 					<Image
