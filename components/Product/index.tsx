@@ -108,7 +108,7 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 									commentsAvgRate={ averageScore || 0 }
 								/>
 							</div>
-							<div className='flex justify-between mt-4 lg:mt-6'>
+							<div className='flex justify-between mt-4 lg:mt-8'>
 								<div>
 									<div className='flex items-end'>
 										<div className='mr-2.5 text-xl font-medium lowercase'>{ t('price') }</div>
@@ -119,27 +119,22 @@ const ProductComponent: FC<Props> = ({ idProduct, locale, data, section, setting
 										* { t(section === Section.Disks ? 'price one disk' : 'price one tire') }
 									</div> }
 								</div>
-								<ActionsBlock className='hidden lg:flex' id={ id } section={ section } quantity={ quantity }
-															productName={ full_name }/>
+								<ActionsBlock className='hidden lg:flex' id={ id } section={ section } quantity={ quantity } productName={ full_name } />
 							</div>
-							<Offers locale={ locale } offerId={ offerId } offers={ offers } setOfferId={ setOfferId }
-											setQuantity={ setQuantity }/>
+							<div className='mt-6'>
+								<Quantity id={ 0 } quantity={ quantity } offerQuantity={ (Number(offer?.quantity) || 0) }
+													price={ offer?.price } onChange={ onChange } setQuantity={ onSetQuantity }/>
+								<BuyActions locale={ locale } offerId={ +offerId } quantity={ quantity } section={ section } onSubmit={ onSubmit } data={ data } />
+							</div>
+							<Offers locale={ locale } offerId={ offerId } offers={ offers } setOfferId={ setOfferId } setQuantity={ setQuantity } />
+							<div className='purchase-information mb-6'>
+								<DeliveryCalculation offer_id={ +offerId } quantity={ quantity } setQuantity={ setQuantity } price={ offer ? +offer?.price : 0 } />
+							</div>
 						</div>
 					</div> }
-				<div
-					className='purchase-information flex lg:items-center justify-between flex-col lg:flex-row gap-4 mt-5 lg:mt-10'>
-					<div>
-						<Quantity id={ 0 } quantity={ quantity } offerQuantity={ (Number(offer?.quantity) || 0) }
-											price={ offer?.price } onChange={ onChange } setQuantity={ onSetQuantity }/>
-						<DeliveryCalculation offer_id={ +offerId } quantity={ quantity } setQuantity={ setQuantity }
-																 price={ offer ? +offer?.price : 0 }/>
-					</div>
-					<BuyActions locale={ locale } offerId={ +offerId } quantity={ quantity } section={ section }
-											onSubmit={ onSubmit } data={ data }/>
-				</div>
-				<CharacteristicsBlock locale={ locale } data={ data }/>
+				<CharacteristicsBlock locale={ locale } data={ data } />
 			</div>
-			<InfoBlock settings={ settings }/>
+			<InfoBlock settings={ settings } />
 		</section>
 	)
 };

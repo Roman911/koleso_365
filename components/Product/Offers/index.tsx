@@ -21,7 +21,7 @@ const Offers: FC<Props> = ({ locale, offerId, offers, setOfferId, setQuantity })
 	}
 
 	return (
-		<div className='offers mt-4 lg:mt-10 mb-5'>
+		<div className='offers mt-4 mb-5'>
 			<RadioGroup color='primary' value={ offerId } onValueChange={ handleChange } size='lg'>
 				{ offers.map(item => {
 					return <Radio color='primary' key={ item.offer_id } value={ `${item.offer_id}` } classNames={{

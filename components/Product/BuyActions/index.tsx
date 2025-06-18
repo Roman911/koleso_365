@@ -52,7 +52,7 @@ const BuyActions: FC<Props> = ({ locale, offerId, quantity, section, data, onSub
 	}
 
 	const handleClick = () => {
-		router.push(`/${ locale }/order`)
+		router.push(`/${ locale }/cart`)
 	}
 
 	const handleClickBuy = () => {
@@ -61,12 +61,12 @@ const BuyActions: FC<Props> = ({ locale, offerId, quantity, section, data, onSub
 	}
 
 	return (
-		<div className='buttons-buy flex flex-col gap-2'>
+		<div className='buttons-buy flex flex-col md:flex-row gap-4 mt-4'>
 			{ cartItems.find(item => +item.id === offerId) ?
-				<Button color='success' size='lg' radius='full' onPress={ onOpen } className='uppercase font-bold'>
+				<Button color='success' size='lg' radius='full' onPress={ onOpen } className='uppercase font-bold w-full'>
 					{ t('in cart') }
 				</Button> :
-				<Button onPress={ handleClickBuy } color='primary' radius='full' size='lg' className='uppercase w-full font-bold lg:w-72'>
+				<Button onPress={ handleClickBuy } color='primary' radius='full' size='lg' className='uppercase w-full font-bold'>
 					{ t('buy') }
 				</Button>
 			}

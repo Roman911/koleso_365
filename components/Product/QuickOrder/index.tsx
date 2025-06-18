@@ -12,12 +12,19 @@ import { Offers } from '@/models/product';
 import { baseDataAPI } from '@/services/baseDataService';
 import PhoneMaskInput from '@/components/UI/PhoneMaskInput';
 import { formatPhoneNumber } from '@/lib/formatPhoneNumber';
+import { Input } from '@heroui/input';
+
+interface ItemProps {
+	product_id: number
+	price: string
+}
 
 interface Props {
 	offerId: number
 	quantity: number
 	section: Section
-	offerItem: Offers | undefined
+	offerItem: Offers | ItemProps | undefined
+	className?: string
 }
 
 const QuickOrder: FC<Props> = (
@@ -25,6 +32,7 @@ const QuickOrder: FC<Props> = (
 		offerId,
 		quantity,
 		offerItem,
+		className
 	}
 ) => {
 	const [ phoneErrorMessage, setPhoneErrorMessage ] = useState<string | null>(null);
@@ -96,7 +104,7 @@ const QuickOrder: FC<Props> = (
 				onPress={ onOpen }
 				radius='full'
 				size='lg'
-				className='bg-white mt-2.5 w-full lg:w-72 hover:bg-white hover:shadow uppercase border border-gray-400 font-bold'
+				className={ className || 'bg-[#334CCC] w-full text-white hover:shadow uppercase font-bold' }
 			>
 				{ t('quick order') }
 			</Button>
@@ -117,8 +125,15 @@ const QuickOrder: FC<Props> = (
 									className='mt-2 mb-8 flex flex-col gap-4'
 									onSubmit={ onSubmit }
 								>
+									<Input
+										isRequired
+										errorMessage={ t('error text') }
+										label={ t('name') }
+										name='name'
+										type='text'
+									/>
 									<PhoneMaskInput phoneErrorMessage={ phoneErrorMessage } />
-									<Button type='submit' color='primary' radius='full' size='lg' className='uppercase ml-auto mt-2 font-bold'
+									<Button type='submit' color='primary' radius='full' size='lg' className='uppercase ml-auto mt-2 font-bold rounded-full'
 													isLoading={ isLoading }>
 										{ t('send') }
 									</Button>

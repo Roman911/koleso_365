@@ -2,7 +2,7 @@
 import { FC, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { Button } from '@heroui/button';
+import { Button, ButtonGroup } from '@heroui/button';
 import { Card, CardBody, CardFooter } from '@heroui/card';
 import { Link, useRouter } from '@/i18n/routing';
 import { useAppDispatch } from '@/hooks/redux';
@@ -15,6 +15,8 @@ import { Section } from '@/models/filter';
 import Rating from '@/components/UI/Rating';
 import IconsBlock from '@/components/ProductList/Card/IconsBlock';
 import ActionsBlock from '@/components/ProductList/Card/ActionsBlock';
+import QuickOrder from '@/components/Product/QuickOrder';
+import { Divider } from '@heroui/divider';
 
 const cargo = [ '3', '4', '5', '6', '9', '10', '11' ];
 
@@ -66,8 +68,8 @@ const ProductCard: FC<Props> = ({ item }) => {
 					/>
 				</div>
 				<Link
-					href={ `/${ page_url }` }
 					onClick={ onClick }
+					href={ `/${ page_url }` }
 					className='font-bold my-2.5 min-h-12 after:absolute after:inset-0'
 				>
 					{ full_name }
@@ -76,18 +78,24 @@ const ProductCard: FC<Props> = ({ item }) => {
 					<span>Артикул: </span><span>{ sku }</span>
 				</div>
 				<Rating commentsCount={ undefined } commentsAvgRate={ 0 }/>
+				<div className='flex items-end mt-2 mb-0.5'>
+					<div className='text-2xl font-bold'>{ min_price } ₴</div>
+				</div>
 			</CardBody>
-			<CardFooter>
-				<div className='w-full flex justify-between'>
-					<div>
-						<div className='flex items-end mb-0.5'>
-							<div className='text-2xl font-bold'>{ min_price } ₴</div>
-						</div>
-					</div>
-					<Button isLoading={ isLoading } className='uppercase font-bold w-36' onPress={ handleClick } color='primary' radius='full'>
+			<CardFooter className='px-0'>
+				<ButtonGroup radius='full' className='w-full'>
+					<Button isLoading={ isLoading } onPress={ handleClick } size='lg' color='primary' className='text-sm font-bold uppercase'>
 						{ t('buy') }
 					</Button>
-				</div>
+					<Divider orientation='vertical' />
+					<QuickOrder
+						offerId={ best_offer.id }
+						quantity={ 1 }
+						section={ section }
+						className='text-sm font-bold uppercase bg-[#334CCC] text-white'
+						offerItem={{ product_id: best_offer.id, price: best_offer.price }}
+					/>
+				</ButtonGroup>
 			</CardFooter>
 		</Card>
 	)

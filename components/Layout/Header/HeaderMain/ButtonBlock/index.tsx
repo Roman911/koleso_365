@@ -48,7 +48,7 @@ const ButtonBlock = () => {
 					<Icons.HeartIcon className='stroke-black'/>
 				</Badge>
 			</Link>
-			<Link href='/order' onClick={ () => handleClick('/order') } className='relative flex'>
+			<Link href='/cart' onClick={ () => handleClick('/order') } className='relative flex'>
 				<Badge
 					color='primary'
 					content={ cartItems.length }

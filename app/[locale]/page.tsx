@@ -10,6 +10,7 @@ import PopularSizes from '@/components/Home/PopularSizes';
 import PopularCarBrands from '@/components/Home/PopularCarBrands';
 import { getFeatureParams, getProducts, getReviews, getSettings } from '@/app/api/api';
 import Reviews from '@/components/Home/Reviews';
+import OurAdvantages from '@/components/Home/OurAdvantages';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Language }> }): Promise<Metadata> {
 	const { locale } = await params;
@@ -36,6 +37,8 @@ export default async function Home({ params }: { params: Promise<{ locale: Langu
 		<main>
 			<LayoutWrapper>
 				<Filter />
+				<Title title='our advantages' className='mt-12 mb-5 text-3xl lg:text-4xl font-bold px-3 lg:px-0' translations={ true } />
+				<OurAdvantages />
 				<Title title={ response[lang].h2_top } className='mt-12 mb-5 text-3xl lg:text-4xl font-bold px-3 lg:px-0' />
 				{ products.result ? <ProductList
 					classnames='grid-cols-1 lg:grid-cols-2 lg:grid-cols-4'
