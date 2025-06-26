@@ -85,6 +85,7 @@ export default function Order() {
 		if(phoneTransform.length < 13) {
 			setPhoneErrorMessage('enter your phone number');
 		} else {
+			setLoadingBtn(true);
 			await createOrder({
 				fast: 0,
 				firstname,

@@ -25,7 +25,6 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 
 	const onSubmit = async(event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		setPhoneErrorMessage(null);
 		const formData = new FormData(event.currentTarget);
 		const phone = formData.get('phone') as string;
 		const phoneTransform = formatPhoneNumber(phone);
@@ -55,7 +54,7 @@ const CallbackModal: FC<Props> = ({ id, quantity }) => {
 			<Button onPress={ onOpen } isIconOnly aria-label='mail' className='bg-gray-300 rounded-full group'>
 				<Icons.PhoneCircuitIcon className='w-4 h-4 stroke-black group-hover:stroke-primary'/>
 			</Button>
-			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange }>
+			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange } placement='top-center'>
 				<ModalContent>
 					{ () => (
 						<>

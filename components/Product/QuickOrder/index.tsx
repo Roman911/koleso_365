@@ -42,7 +42,6 @@ const QuickOrder: FC<Props> = (
 
 	const onSubmit = async(event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		setPhoneErrorMessage(null);
 		const formData = new FormData(event.currentTarget);
 		const phone = formData.get('phone') as string;
 		const phoneTransform = formatPhoneNumber(phone);
@@ -108,7 +107,7 @@ const QuickOrder: FC<Props> = (
 			>
 				{ t('quick order') }
 			</Button>
-			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange }>
+			<Modal isOpen={ isOpen } onOpenChange={ onOpenChange } placement='top-center'>
 				<ModalContent>
 					{ () => (
 						<>
