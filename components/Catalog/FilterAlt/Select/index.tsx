@@ -60,7 +60,7 @@ const Select: FC<SelectProps> = (
 	}, [ focusValue ]);
 
 	const handleClick = (event: MouseEvent<HTMLElement> | ChangeEvent<HTMLElement>, value: number | string | undefined, isStudded?: boolean) => {
-		const newValue = filterValue === value ? null : value;
+		const newValue = name === 'jemnist' ? value : filterValue === value ? null : value;
 		const newValueStudded = valueStudded === value ? null : value;
 		if(name === 'other') {
 			if(typeof value === 'string' && (value === 'only_c' || value === 'only_xl' || value === 'only_owl' || value === 'only_run_flat' || value === 'only_off_road')) {
@@ -102,6 +102,16 @@ const Select: FC<SelectProps> = (
 			)
 		}>
 			{ options?.filter(i => i.label.toString().toLowerCase().includes(eventSearch)).map(item => {
+				let checked;
+
+				if(name === 'other') {
+					checked = !!filterOther?.[item.value as keyof typeof filterOther];
+				} else if(name === 'jemnist') {
+					checked = String(filterValue).split('|').includes(String(item.value));
+				} else {
+					checked = filterValue === item.value;
+				}
+
 				return <li
 					key={ item.value }
 					id='listbox-option-0'
@@ -115,7 +125,7 @@ const Select: FC<SelectProps> = (
 						>
 							<input
 								onChange={ (event) => handleClick(event, item.value) }
-								checked={ name === 'other' ? !!filterOther?.[item.value as keyof typeof filterOther] : filterValue === item.value }
+								checked={ checked }
 								id={ `${ name }-${ item.value }` }
 								type='checkbox'
 								className='peer relative h-7 w-7 bg-white appearance-none cursor-pointer rounded-sm border border-[#A9ACB2] transition-all checked:border-primary checked:bg-primary hover:border-primary'

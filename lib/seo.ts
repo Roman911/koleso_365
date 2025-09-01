@@ -72,7 +72,7 @@ export const parseUrl = (url: string): ParsedResult => {
 		const [name, value] = item.split('-');
 		const paramName = paramTrans[name as keyof typeof paramTrans];
 		if (paramName) {
-			result[paramName] = value || '';
+			result[paramName] = decodeURIComponent(value) || '';
 		}
 	});
 

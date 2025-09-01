@@ -27,7 +27,7 @@ const FilterAlt: FC<Props> = ({ filterData, section }) => {
 	const t = useTranslations('Filters')
 	const [ element, setElement ] = useState<HTMLElement | null>(null);
 	const dispatch = useAppDispatch();
-	const { subsection } = useAppSelector(state => state.filterReducer);
+	const { subsection, filter } = useAppSelector(state => state.filterReducer);
 	const { data } = baseDataAPI.useFetchBaseDataQuery('');
 	const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -36,7 +36,20 @@ const FilterAlt: FC<Props> = ({ filterData, section }) => {
 			dispatch(setParams({ model_id: null }));
 		}
 		setElement(element);
-		dispatch(setParams({ [name]: value }));
+		if (name === 'jemnist' || filter.jemnist) {
+			const parts = filter.jemnist ? filter.jemnist.split('|') : [];
+			const index = parts.indexOf(String(value));
+
+			if (index !== -1) {
+				parts.splice(index, 1);
+			} else {
+				parts.push(String(value));
+			}
+
+			dispatch(setParams({ [name]: parts.length > 0 ? parts.join('|') : null }));
+		} else {
+			dispatch(setParams({ [name]: value }));
+		}
 	}
 
 	return (
