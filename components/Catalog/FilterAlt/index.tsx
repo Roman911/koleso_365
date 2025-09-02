@@ -36,7 +36,7 @@ const FilterAlt: FC<Props> = ({ filterData, section }) => {
 			dispatch(setParams({ model_id: null }));
 		}
 		setElement(element);
-		if (name === 'jemnist' || filter.jemnist) {
+		if (name === 'jemnist' && filter.jemnist) {
 			const parts = filter.jemnist ? filter.jemnist.split('|') : [];
 			const index = parts.indexOf(String(value));
 
