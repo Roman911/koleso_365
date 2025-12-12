@@ -1,4 +1,10 @@
 :root {
+    color: var(--color-black);
+    background-color: var(--color-gray-50);
+}
+
+
+:root {
     --g-color-fill-light: #ffffff;
     --g-color-dark: #050000;/*new*/
     --g-color-primary: var(--g-color-green-500);/*new*/

@@ -64,7 +64,7 @@ const HeaderCatalog: FC<Props> = ({ section, slug }) => {
 		},
 		{
 			translations: false,
-			title: `${SeasonTransform(urlParams.sezon ?? '')?.name ? t(SeasonTransform(urlParams.sezon ?? '')?.name) : ''} ${t(section)}`,
+			title: `${SeasonTransform(urlParams.sezon ?? '')?.name ? t(SeasonTransform(urlParams.sezon ?? '')?.name || '') : ''} ${t(section)}`,
 			href: urlParams.sezon ? `/catalog/${section}/s-${urlParams.sezon}` : '',
 		},
 		{

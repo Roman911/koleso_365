@@ -51,7 +51,7 @@ const Reviews: FC<Props> = ({ reviews }) => {
 		<div className="mt-28">
 			<Title title="customer reviews" translations />
 			{reviews.length > 3 ? (
-				<div className=' md:max-w-11/12 mx-auto md:px-8'>
+				<div className='mx-auto md:px-8'>
 					<Slider {...settings}>
 						{reviews.map((review) => (
 							<ReviewItem key={review.review_id} review={review} />

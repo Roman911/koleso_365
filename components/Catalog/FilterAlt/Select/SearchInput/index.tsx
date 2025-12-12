@@ -18,7 +18,7 @@ const SearchInput: FC<SearchInputProps> = ({ value, handleChange }) => {
 				value={ value }
 				onChange={ event => handleChange(event.target.value) }
 				placeholder={ t('search') }
-				className='py-2 pl-10 pr-2 w-full border border-[#A9ACB2] rounded-sm focus:border-blue-300'
+				className='py-2 pl-10 pr-2 w-full border border-[#A9ACB2] rounded-sm focus:border-blue-300 bg-white outline-0'
 			/>
 		</label>
 	</div>

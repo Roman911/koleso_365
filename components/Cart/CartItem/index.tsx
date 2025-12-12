@@ -43,7 +43,6 @@ const CartItem: FC<CartItemProps> = (
 	}) => {
 
 	const onChange = (e: { target: HTMLInputElement }) => {
-		console.log(e)
 		const value = e.target.value;
 		const onlyNumbers = value.replace(/\D/g, '');
 		const numericValue = Number(onlyNumbers);
@@ -51,7 +50,7 @@ const CartItem: FC<CartItemProps> = (
 		setQuantity(id,numericValue < offerQuantity ? numericValue : offerQuantity);
 	}
 
-	return <div className='flex flex-col lg:flex-row py-4 items-center relative border-b'>
+	return <div className='flex flex-col lg:flex-row py-4 items-center relative border-b border-gray-100'>
 		<Link href={`/${pageUrl}`}>
 			<Image src={ default_photo } height={ 122 } width={ 122 } alt={ full_name } />
 		</Link>

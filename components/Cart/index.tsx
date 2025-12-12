@@ -52,7 +52,7 @@ const CartComponent: FC<CarProps> = ({ data, cartItems, removeProduct, setQuanti
 	}
 
 	return <div className='flex flex-col bg-white p-2 rounded-sm shadow-sm gap-10'>
-		<ScrollShadow className='max-h-[400px] border rounded-lg px-4'>
+		<ScrollShadow className='max-h-[400px] border border-gray-100 rounded-lg px-4'>
 			{ data?.data.products.map(item => {
 				const quantity = cartItems?.find(i => i.id === item.best_offer.id)?.quantity || 1;
 				return <CartItem

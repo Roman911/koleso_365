@@ -39,7 +39,7 @@ const Summary: FC<SummaryProps> = ({ data, isLoading, loadingBtn, cartItems }) =
 			<div className='pt-5 pb-2 px-6'>
 				<h3 className='font-bold'>{ t('your order') }</h3>
 				<Spinner height='h-40' show={ isLoading }>
-					<div className='divide-y'>
+					<div className='divide-y divide-gray-100'>
 						{ data?.data.products.map(item => {
 							const quantity = cartItems.find(i => i.id === item.best_offer.id)?.quantity || 0;
 							return <Item
